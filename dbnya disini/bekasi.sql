@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2022 at 10:05 PM
+-- Generation Time: Jul 21, 2022 at 09:58 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -49,7 +49,7 @@ CREATE TABLE `barang` (
 INSERT INTO `barang` (`id`, `nama`, `jenis`, `kode`, `kategori_id`, `kondisi`, `keterangan`, `tanggal_pengadaan`, `gambar`, `id_lokasi`, `is_active`, `is_inventaris`) VALUES
 (1, 'Printer Hp', 'Elektronika', '1111', 2, 'baik', 'Baik Banget', '2022-02-01', 'barang.jpg', 2, 1, 0),
 (3, 'Tanah', '500 m2', '8999555', 1, '', '', '2022-02-01', 'bukti.jpg', 1, 1, 1),
-(5, 'Laptop', 'Elektronika', 'L001', 2, 'baik', 'Baik Banget', '2022-02-01', 'barang.jpg', 1, 1, 1),
+(5, 'Laptop', 'Elektronika', 'L001', 2, 'baik', 'Baik Banget', '2022-03-01', 'barang.jpg', 1, 1, 1),
 (6, 'pulpen', 'Alat Tulis', 'p001', 2, 'baik', 'Baik Banget', '2022-02-01', 'barang.jpg', 1, 1, 0),
 (7, 'komputer', 'Elektronika', 'k009', 2, 'buruk', 'Komputernya sudah ketinggalan jaman', '2022-02-01', 'barang.jpg', 2, 1, 1),
 (8, 'Meja Kantor', 'Perabotan', '0011006', 2, 'baik', 'Baik Banget', '2022-02-01', 'barang.jpg', 1, 0, 0),
@@ -57,8 +57,8 @@ INSERT INTO `barang` (`id`, `nama`, `jenis`, `kode`, `kategori_id`, `kondisi`, `
 (11, 'Mic', 'Elektronika', 'S-01214', 2, 'baik', 'Baik Banget', '2022-02-22', 'barang.jpg', 2, 0, 0),
 (13, 'Lampu Sorot', 'Elektronika', 'S-01215', 2, 'baik', 'Baik Banget', '2022-02-25', 'barang.jpg', 2, 1, 0),
 (15, 'Tanah', '100 Hektar', 'T-01234', 1, 'baik', 'Baik Banget', '2022-04-07', 'barang.jpg', 1, 1, 0),
-(16, 'Coffe Machine', '', 'C-12345', 2, 'baik', 'bisa digunakan', '2022-04-10', 'barang.jpg', 1, 1, 1),
-(17, 'Televisi', '', 'T-121234', 2, 'baik', 'Bagus', '2022-06-28', 'barang1.jpg', 1, 1, 0);
+(16, 'Coffe Machine', '', 'C-12345', 2, 'baik', 'bisa digunakan', '2022-07-10', 'barang.jpg', 1, 1, 1),
+(17, 'Televisi', '', 'T-121234', 2, 'baik', 'Bagus', '2022-07-28', 'barang1.jpg', 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -89,7 +89,7 @@ INSERT INTO `kartu_inventaris_barang` (`id`, `id_lokasi`, `status_pengesahan`, `
 (14, 1, 1, '648GwNduIEAYKXD', 7, 0, '2022-04-11 01:32:50', '2022-04-10 00:00:00'),
 (15, 1, 0, NULL, NULL, 0, '2022-06-27 01:36:53', '2022-06-27 01:36:53'),
 (16, 1, 0, NULL, NULL, 1, '2022-06-27 02:32:19', '2022-06-27 02:32:19'),
-(17, 2, 0, NULL, NULL, 1, '2022-06-27 02:32:28', '2022-06-27 02:32:28');
+(17, 2, 1, 'iTLSKJ1VFx2WrhB', 7, 1, '2022-06-27 02:32:28', '2022-07-21 00:00:00');
 
 -- --------------------------------------------------------
 

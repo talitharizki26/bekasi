@@ -36,7 +36,7 @@ class MBarang extends CI_Model
         $this->db->select('*, barang.id AS id_barang, kategori.id AS id_kategori, kategori.nama AS nama_kategori, barang.nama AS nama_barang, kartu_inventaris_barang.id AS id_kartu_inventaris_barang');
         $this->db->join('pengesahan_barang', 'pengesahan_barang.id_barang = barang.id');
         $this->db->join('kartu_inventaris_barang', 'pengesahan_barang.id_kartu_inventaris_barang = kartu_inventaris_barang.id');
-        
+
         $this->db->join('kategori', 'kategori.id = barang.kategori_id');
         $this->db->join('lokasi', 'lokasi.id = barang.id_lokasi');
         $this->db->join('kecamatan', 'kecamatan.id = lokasi.id_kecamatan');
@@ -50,19 +50,44 @@ class MBarang extends CI_Model
         ])->result();
     }
 
-    function get_inventaris_barang($id_lokasi, $id_kategori = null)
+    function get_inventaris_barang($id_lokasi, $id_kategori = null, $periode = null)
     {
+
+        $this->db->select('MIN(tanggal_pengadaan) AS tanggal_awal');
+        // $this->db->join('pengesahan_barang', 'pengesahan_barang.id_barang = barang.id');
+        // $this->db->join('kartu_inventaris_barang', 'pengesahan_barang.id_kartu_inventaris_barang = kartu_inventaris_barang.id');
+
+        $this->db->join('kategori', 'kategori.id = barang.kategori_id');
+        $this->db->join('lokasi', 'lokasi.id = barang.id_lokasi');
+
+        if ($id_kategori) {
+            $this->db->where('kategori_id', $id_kategori);
+        }
+        $tanggal_awal = $this->db->get_where($this->table, [
+            'barang.id_lokasi' => $id_lokasi,
+            'is_inventaris' => 1,
+        ])->row()->tanggal_awal;
 
         $this->db->select('*, barang.id AS id_barang, kategori.id AS id_kategori, kategori.nama AS nama_kategori, barang.nama AS nama_barang');
         // $this->db->join('pengesahan_barang', 'pengesahan_barang.id_barang = barang.id');
         // $this->db->join('kartu_inventaris_barang', 'pengesahan_barang.id_kartu_inventaris_barang = kartu_inventaris_barang.id');
-        
+
         $this->db->join('kategori', 'kategori.id = barang.kategori_id');
         $this->db->join('lokasi', 'lokasi.id = barang.id_lokasi');
         $this->db->join('kecamatan', 'kecamatan.id = lokasi.id_kecamatan');
 
         if ($id_kategori) {
             $this->db->where('kategori_id', $id_kategori);
+        }
+        if ($periode == 'triwulan') {
+            $tanggal_akhir = date('Y-m-d', strtotime('+3 month', strtotime($tanggal_awal)));
+            $this->db->where('tanggal_pengadaan <', $tanggal_akhir);
+        } elseif ($periode == 'semester') {
+            $tanggal_akhir = date('Y-m-d', strtotime('+6 month', strtotime($tanggal_awal)));
+            $this->db->where('tanggal_pengadaan <', $tanggal_akhir);
+        } elseif ($periode == 'tahunan') {
+            $tanggal_akhir =  date('Y-m-d', strtotime('+1 year', strtotime($tanggal_awal)));
+            $this->db->where('tanggal_pengadaan <', $tanggal_akhir);
         }
         return $this->db->get_where($this->table, [
             'barang.id_lokasi' => $id_lokasi,
@@ -86,7 +111,7 @@ class MBarang extends CI_Model
             'is_inventaris' => 0,
         ])->result();
     }
-    
+
     function get_kartu_inventaris_barang($id_kartu_inventaris_barang)
     {
         return $this->db
@@ -122,7 +147,7 @@ class MBarang extends CI_Model
         $this->db->where('barang.id', $id_barang);
         return $this->db->get();
     }
-    
+
 
     // get total rows
     function total_rows($q = NULL)
@@ -167,7 +192,6 @@ class MBarang extends CI_Model
                 'id_kartu_inventaris_barang' => $id_kartu_inventaris_barang
             ]);
         }
-
     }
 
     // insert data
@@ -178,9 +202,6 @@ class MBarang extends CI_Model
         $this->db->update('kartu_inventaris_barang', ['is_valid' => 0]);
         $this->db->insert('kartu_inventaris_barang', ['id_lokasi' => $data['id_lokasi']]);
         $this->insertPengesahanBarang($this->db->insert_id(), $data['id_lokasi']);
-
-        
-
     }
 
     // update data

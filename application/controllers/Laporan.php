@@ -46,11 +46,16 @@ class Laporan extends CI_Controller
     }
     public function kelola_barang($id_lokasi = null, $id_kategori = null)
     {
+        if (!empty($this->input->get('periode'))) {
+            $periode = $this->input->get('periode');
+        } else {
+            $periode = "all";
+        }
         $this->load->view('template', [
             'page' => 'laporan/kelola-inventaris-barang',
             'lokasi' =>  $this->MBarang->get_barang_by_lokasi($id_lokasi),
             'data_barang' => $this->MBarang->get_non_inventaris_barang($id_lokasi, $id_kategori),
-            'data_inventaris' => $this->MBarang->get_inventaris_barang($id_lokasi, $id_kategori),
+            'data_inventaris' => $this->MBarang->get_inventaris_barang($id_lokasi, $id_kategori, $periode),
         ]);
     }
 

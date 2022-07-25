@@ -5,7 +5,7 @@ class Laporan extends CI_Controller
 {
     public function __construct()
     {
-        parent::__construct();
+        Parent::__construct();
         $this->load->model('MBarang');
         $this->load->model('MRuangan');
         $this->load->model('MTransaksi');

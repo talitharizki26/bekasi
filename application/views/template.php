@@ -129,7 +129,7 @@
 
                     <?php if ($this->session->hak_akses == 'admin') : ?>
                         <li class="">
-                            <a href="<?php echo site_url() ?>dashboardhtml">
+                            <a href="<?php echo site_url() ?>dashboard">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
@@ -196,7 +196,7 @@
                     <?php elseif ($this->session->hak_akses == 'petugas') : ?>
 
                         <!-- <li class="">
-                            <a href="<?php echo site_url() ?>dashboardhtml">
+                            <a href="<?php echo site_url() ?>dashboard">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li> -->
@@ -259,9 +259,9 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 2.4.18
+                <b>Version</b> 24.07.22
             </div>
-            <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
+            <strong>Copyright &copy; 2021-2022 <a href="https://adminlte.io">SiVaCam</a>.</strong> All rights
             reserved.
         </footer>
 

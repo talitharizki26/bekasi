@@ -119,6 +119,8 @@ class Barang extends CI_Controller
             'id' => set_value('id'),
             'nama' => set_value('nama'),
             'jenis' => set_value('jenis'),
+            'kondisi' => set_value('kondisi'),
+            'keterangan' => set_value('keterangan'),
             'kode' => set_value('kode'),
             'kategori_id' => set_value('kategori_id'),
             'tanggal_pengadaan' => set_value('tanggal_pengadaan'),

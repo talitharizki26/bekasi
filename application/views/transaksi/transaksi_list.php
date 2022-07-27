@@ -75,7 +75,8 @@
                                 ]);
                                 echo ' | ';
                                 echo anchor(site_url('transaksi/delete/' . $transaksi->id), 'Delete', [
-                                    'class' => 'btn btn-danger btn-sm',
+                                    'class' => 'btn btn-danger btn-sm tombol-hapus',
+                                    'data-hapus' => 'Transaksi',
                                     'onclick' => '"javasciprt: return confirm(\'Are You Sure ?\')"'
                                 ]);
                                 ?>

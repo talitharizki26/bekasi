@@ -9,7 +9,7 @@
     </ol>
 </section>
 
-    <!-- Main content -->
+<!-- Main content -->
 <section class="content">
 
     <div style="margin-bottom:1em">
@@ -23,29 +23,29 @@
     <div class="box">
         <div class="box-body">
             <table class="table table-bordered" id="example1">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Barang</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php 
-            $no = 1;
-            foreach($kategoris as $kategori) : ?>
-                <tr>
-                    <td><?= $no++;?></td>
-                    <td><?= $kategori['nama'];?></td>
-                    <td>
-                        <a href="<?= base_url(); ?>kategori/update/<?= $kategori['id'];?>" class="btn btn-primary">Edit</a>
-                        <a href="<?= base_url(); ?>kategori/delete/<?= $kategori['id'];?>" class="btn btn-danger">Hapus</a>
-                        <a href="<?= base_url(); ?>barang/index/<?= $kategori['id'];?>" class="btn btn-info">Lihat Barang</a>
-                    </td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Barang</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $no = 1;
+                    foreach ($kategoris as $kategori) : ?>
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $kategori['nama']; ?></td>
+                            <td>
+                                <a href="<?= base_url(); ?>kategori/update/<?= $kategori['id']; ?>" class="btn btn-primary">Edit</a>
+                                <a href="<?= base_url(); ?>kategori/delete/<?= $kategori['id']; ?>" class="btn btn-danger tombol-hapus" data-hapus="Kategori">Hapus</a>
+                                <a href="<?= base_url(); ?>barang/index/<?= $kategori['id']; ?>" class="btn btn-info">Lihat Barang</a>
+                            </td>
+                        </tr>
 
-            <?php endforeach; ?>
-            </tbody>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
     </div>

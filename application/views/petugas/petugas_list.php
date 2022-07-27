@@ -9,7 +9,7 @@
     </ol>
 </section>
 
-    <!-- Main content -->
+<!-- Main content -->
 <section class="content">
 
     <div style="margin-bottom:1em">
@@ -23,36 +23,36 @@
     <div class="box">
         <div class="box-body">
             <table class="table table-bordered" id="example1">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nomor Anggota</th>
-                    <th>Nama Petugas</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Level</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php 
-            $no = 1;
-            foreach($petugass as $petugas) : ?>
-                <tr>
-                    <td><?= $no++;?></td>
-                    <td><?= $petugas['nomor_anggota'];?></td>
-                    <td><?= $petugas['nama_operator'];?></td>
-                    <td><?= $petugas['username'];?></td>
-                    <td><?= $petugas['password'];?></td>
-                    <td><?= $petugas['hak_akses'];?></td>
-                    <td>
-                        <a href="<?= base_url(); ?>petugas/update/<?= $petugas['id'];?>" class="btn btn-primary">Edit</a>
-                        <a href="<?= base_url(); ?>petugas/delete/<?= $petugas['id'];?>" class="btn btn-danger">Hapus</a>
-                    </td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nomor Anggota</th>
+                        <th>Nama Petugas</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Level</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $no = 1;
+                    foreach ($petugass as $petugas) : ?>
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $petugas['nomor_anggota']; ?></td>
+                            <td><?= $petugas['nama_operator']; ?></td>
+                            <td><?= $petugas['username']; ?></td>
+                            <td><?= $petugas['password']; ?></td>
+                            <td><?= $petugas['hak_akses']; ?></td>
+                            <td>
+                                <a href="<?= base_url(); ?>petugas/update/<?= $petugas['id']; ?>" class="btn btn-primary">Edit</a>
+                                <a href="<?= base_url(); ?>petugas/delete/<?= $petugas['id']; ?>" class="btn btn-danger tombol-hapus" data-hapus="Petugas">Hapus</a>
+                            </td>
+                        </tr>
 
-            <?php endforeach; ?>
-            </tbody>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
     </div>

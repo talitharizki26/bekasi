@@ -42,6 +42,11 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        .swal-wide {
+            width: 850px !important;
+        }
+    </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -273,7 +278,27 @@
         <!-- jQuery UI 1.11.4 -->
         <script src="<?php echo base_url() ?>assets/bower_components/jquery-ui/jquery-ui.min.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+            $('.tombol-hapus').on('click', function(e) {
+                const hapus = $(this).data('hapus');
+                const href = $(this).attr('href');
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Apakah Anda Yakin?',
+                    text: "Data " + hapus + " akan dihapus!",
+                    icon: 'warning',
+                    confirmButtonText: 'Iya',
+                    cancelButtonText: 'Tidak',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.location.href = href;
+                    }
+                })
+            });
             $.widget.bridge('uibutton', $.ui.button);
             $(function() {
                 $('#example1').DataTable({

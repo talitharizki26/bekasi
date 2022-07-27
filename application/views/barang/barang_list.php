@@ -112,7 +112,7 @@
                                     </td>
                                     <td>
                                         <a href="<?= base_url(); ?>barang/update/<?= $barang['id_barang']; ?>" class="btn btn-primary">Edit</a>
-                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger">Hapus</a>
+                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger tombol-hapus" data-hapus="barang">Hapus</a>
                                     </td>
                                 </tr>
 
@@ -157,7 +157,7 @@
                                     <td><?= $barang['keterangan']; ?></td>
                                     <td>
                                         <a href="<?= base_url(); ?>barang/update/<?= $barang['id_barang']; ?>" class="btn btn-primary">Edit</a>
-                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger">Hapus</a>
+                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger tombol-hapus" data-hapus="barang">Hapus</a>
                                     </td>
                                 </tr>
 
@@ -202,7 +202,7 @@
                                     <td><?= $barang['keterangan']; ?></td>
                                     <td>
                                         <a href="<?= base_url(); ?>barang/update/<?= $barang['id_barang']; ?>" class="btn btn-primary">Edit</a>
-                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger">Hapus</a>
+                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger tombol-hapus" data-hapus="barang">Hapus</a>
                                     </td>
                                 </tr>
 
@@ -247,7 +247,7 @@
                                     <td><?= $barang['keterangan']; ?></td>
                                     <td>
                                         <a href="<?= base_url(); ?>barang/update/<?= $barang['id_barang']; ?>" class="btn btn-primary">Edit</a>
-                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger">Hapus</a>
+                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger tombol-hapus" data-hapus="barang">Hapus</a>
                                     </td>
                                 </tr>
 
@@ -292,7 +292,7 @@
                                     <td><?= $barang['keterangan']; ?></td>
                                     <td>
                                         <a href="<?= base_url(); ?>barang/update/<?= $barang['id_barang']; ?>" class="btn btn-primary">Edit</a>
-                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger">Hapus</a>
+                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger tombol-hapus" data-hapus="barang">Hapus</a>
                                     </td>
                                 </tr>
 
@@ -337,7 +337,7 @@
                                     <td><?= $barang['keterangan']; ?></td>
                                     <td>
                                         <a href="<?= base_url(); ?>barang/update/<?= $barang['id_barang']; ?>" class="btn btn-primary">Edit</a>
-                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger">Hapus</a>
+                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger tombol-hapus" data-hapus="barang">Hapus</a>
                                     </td>
                                 </tr>
 
@@ -382,7 +382,7 @@
                                     <td><?= $barang['keterangan']; ?></td>
                                     <td>
                                         <a href="<?= base_url(); ?>barang/update/<?= $barang['id_barang']; ?>" class="btn btn-primary">Edit</a>
-                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger">Hapus</a>
+                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger tombol-hapus" data-hapus="barang">Hapus</a>
                                     </td>
                                 </tr>
 
@@ -427,7 +427,7 @@
                                     <td><?= $barang['keterangan']; ?></td>
                                     <td>
                                         <a href="<?= base_url(); ?>barang/update/<?= $barang['id_barang']; ?>" class="btn btn-primary">Edit</a>
-                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger">Hapus</a>
+                                        <a href="<?= base_url(); ?>barang/delete/<?= $barang['id_barang']; ?>" class="btn btn-danger tombol-hapus" data-hapus="barang">Hapus</a>
                                     </td>
                                 </tr>
 

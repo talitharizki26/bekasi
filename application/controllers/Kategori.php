@@ -31,7 +31,7 @@ class Kategori extends CI_Controller
             $this->load->view('template', $data);
             // $this->load->view('kategori/kategori_read', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Kategori Tidak ditemukan');
             redirect(site_url('kategori'));
         }
     }
@@ -61,7 +61,7 @@ class Kategori extends CI_Controller
             );
 
             $this->MKategori->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
+            $this->session->set_flashdata('message', 'Data Kategori berhasil disimpan');
             redirect(site_url('kategori'));
         }
     }
@@ -81,7 +81,7 @@ class Kategori extends CI_Controller
             $this->load->view('template', $data);
             //$this->load->view('kategori/kategori_form', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Kategori Tidak ditemukan');
             redirect(site_url('kategori'));
         }
     }
@@ -98,7 +98,7 @@ class Kategori extends CI_Controller
             );
 
             $this->MKategori->update($this->input->post('id', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
+            $this->session->set_flashdata('message', 'Data Kategori berhasil diperbarui');
             redirect(site_url('kategori'));
         }
     }
@@ -109,10 +109,10 @@ class Kategori extends CI_Controller
 
         if ($row) {
             $this->MKategori->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $this->session->set_flashdata('message', 'Data Kategori berhasil dihapus');
             redirect(site_url('kategori'));
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Kategori Tidak ditemukan');
             redirect(site_url('kategori'));
         }
     }

@@ -106,7 +106,7 @@ class Barang extends CI_Controller
             $this->load->view('template', $data);
             //$this->load->view('barang/barang_read', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Barang tidak ditemukan');
             redirect(site_url('barang'));
         }
     }
@@ -162,10 +162,10 @@ class Barang extends CI_Controller
                     );
 
                     $this->MBarang->insert($data);
-                    $this->session->set_flashdata('message', 'Create Record Success');
+                    $this->session->set_flashdata('message', 'Data Barang berhasil dibuat');
                 } else {
-                    $this->session->set_flashdata('flash_error', $this->upload->display_errors());
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+                    $this->session->set_flashdata('flash_error', 'Gambar Tidak Sesuai ketentuan');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . 'Gambar Tidak Sesuai ketentuan' . '</div>');
                 }
             } else {
                 $this->session->set_flashdata('flash_gagal', 'Gambar Barang Wajib diupload!');
@@ -203,7 +203,7 @@ class Barang extends CI_Controller
             $this->load->view('template', $data);
             //$this->load->view('barang/barang_form', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Barang Tidak ditemukan');
             redirect(site_url('barang'));
         }
     }
@@ -239,13 +239,13 @@ class Barang extends CI_Controller
                     $new_gambar = $this->upload->data('file_name');
                     $this->db->set('gambar', $new_gambar);
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . 'Gambar Tidak Sesuai ketentuan' . '</div>');
                     redirect($_SERVER['HTTP_REFERER']);
                 }
             }
 
             $this->MBarang->update($this->input->post('id', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
+            $this->session->set_flashdata('message', 'Data Barang telah disimpan');
             redirect(site_url('barang'));
         }
     }
@@ -256,10 +256,10 @@ class Barang extends CI_Controller
 
         if ($row) {
             $this->MBarang->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $this->session->set_flashdata('message', 'Data Barang berhasil dihapus');
             redirect(site_url('barang'));
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Barang Tidak ditemukan');
             redirect(site_url('barang'));
         }
     }

@@ -46,7 +46,7 @@ class Transaksi extends CI_Controller
             $data['page'] = 'transaksi/transaksi_read';
             $this->load->view('template', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Transaksi tidak ditemukan');
             redirect(site_url('transaksi'));
         }
     }
@@ -100,7 +100,7 @@ class Transaksi extends CI_Controller
             );
 
             $this->MTransaksi->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
+            $this->session->set_flashdata('message', 'Data Transaksi berhasil disimpan');
             redirect(site_url('transaksi'));
         }
     }
@@ -126,7 +126,7 @@ class Transaksi extends CI_Controller
             $data['barang'] = $this->db->get('barang')->result();
             $this->load->view('template', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Transaksi tidak ditemukan');
             redirect(site_url('transaksi'));
         }
     }
@@ -148,7 +148,7 @@ class Transaksi extends CI_Controller
             );
 
             $this->MTransaksi->update($this->input->post('id', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
+            $this->session->set_flashdata('message', 'Data Transaksi berhasil disimpan');
             redirect(site_url('transaksi'));
         }
     }
@@ -159,10 +159,10 @@ class Transaksi extends CI_Controller
 
         if ($row) {
             $this->MTransaksi->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $this->session->set_flashdata('message', 'Data Tranasksi berhasil dihapus');
             redirect(site_url('transaksi'));
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Transaksi tidak ditemukan');
             redirect(site_url('transaksi'));
         }
     }

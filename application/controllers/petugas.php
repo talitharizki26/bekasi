@@ -55,8 +55,8 @@ class Petugas extends CI_Controller
                 'id_kecamatan' => $this->input->post('id_kecamatan', TRUE),
             );
 
-            $this->db->insert('user',$data);
-            $this->session->set_flashdata('message', 'Create Record Success');
+            $this->db->insert('user', $data);
+            $this->session->set_flashdata('message', 'Data Petugas berhasil disimpan');
             redirect(site_url('petugas'));
         }
     }
@@ -81,7 +81,7 @@ class Petugas extends CI_Controller
             $data['list_kecamatan'] = $this->db->get('kecamatan')->result();
             $this->load->view('template', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Petugas tidak ditemukan');
             redirect(site_url('petugas'));
         }
     }
@@ -104,7 +104,7 @@ class Petugas extends CI_Controller
 
             $this->db->where('id', $this->input->post('id', TRUE));
             $this->db->update('user', $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
+            $this->session->set_flashdata('message', 'Data Petugas Berhasil diperbarui');
             redirect(site_url('petugas'));
         }
     }
@@ -116,10 +116,10 @@ class Petugas extends CI_Controller
 
         if ($row) {
             $this->db->delete('user', ['id' => $id]);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $this->session->set_flashdata('message', 'Data Petugas berhasil dihapus');
             redirect(site_url('petugas'));
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Petugas Tidak ditemukan');
             redirect(site_url('petugas'));
         }
     }
@@ -135,5 +135,4 @@ class Petugas extends CI_Controller
         $this->form_validation->set_rules('id', 'id', 'trim');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
-
 }

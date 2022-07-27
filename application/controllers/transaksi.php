@@ -41,6 +41,7 @@ class Transaksi extends CI_Controller
                 'tanggal_distribusi' => $row->tanggal_distribusi,
                 'status' => $row->status,
                 'bap' => $row->bap,
+                'approval' => $row->approval,
             );
 
             $data['page'] = 'transaksi/transaksi_read';

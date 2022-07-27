@@ -8,7 +8,7 @@ class dashboard extends CI_Controller
     public function index()
     {
         $data['page'] = 'dashboard_view';
-        if ($this->session->userdata('hak_akses') == 'kecamatan'){
+        if ($this->session->userdata('hak_akses') == 'kecamatan') {
             $data['kecamatan'] = $this->db->get_where('kecamatan', ['id' => $this->session->userdata('id_kecamatan')])->row();
             $this->db->select('*, kartu_inventaris_barang.id AS id_kartu_inventaris_barang');
             $this->db->join('lokasi', 'lokasi.id = kartu_inventaris_barang.id_lokasi');
@@ -29,7 +29,7 @@ class dashboard extends CI_Controller
             ]);
             $data['jumlah_laporan'] = $data['barang']->num_rows() + $data['ruangan']->num_rows();
 
-            
+
             $this->db->join('lokasi', 'lokasi.id = kartu_inventaris_barang.id_lokasi');
             $num_riwayat_barang = $this->db->get_where('kartu_inventaris_barang', [
                 'id_kecamatan' => $this->session->userdata('id_kecamatan'),
@@ -52,8 +52,7 @@ class dashboard extends CI_Controller
                 'is_valid' => 1,
                 'id_kecamatan' => $this->session->userdata('id_kecamatan'),
             ])->num_rows();
-
-        } elseif ($this->session->userdata('hak_akses') == 'admin'){
+        } elseif ($this->session->userdata('hak_akses') == 'admin') {
             $data['num_user'] = $this->db->get('user')->num_rows();
             $data['num_barang'] = $this->db->get('barang')->num_rows();
             $data['num_barang_baik'] = $this->db->get_where('barang', ['kondisi' => 'baik'])->num_rows();
@@ -73,7 +72,8 @@ class dashboard extends CI_Controller
         $this->load->view('template', $data);
         //$this->load->view('dashboard_view',);
     }
-    public function logout(){
+    public function logout()
+    {
         session_destroy();
         redirect(site_url('/'));
     }

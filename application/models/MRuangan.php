@@ -37,7 +37,7 @@ class MRuangan extends CI_Model
         $this->db->select('*, ruangan.id AS id_ruangan, kartu_inventaris_ruangan.id AS id_kartu_inventaris_ruangan');
         $this->db->join('pengesahan_ruangan', 'pengesahan_ruangan.id_ruangan = ruangan.id');
         $this->db->join('kartu_inventaris_ruangan', 'pengesahan_ruangan.id_kartu_inventaris_ruangan = kartu_inventaris_ruangan.id');
-        
+
         $this->db->join('lokasi', 'lokasi.id = ruangan.id_lokasi');
         $this->db->join('kecamatan', 'kecamatan.id = lokasi.id_kecamatan');
         // $this->db->where('is_active', 1);
@@ -58,7 +58,7 @@ class MRuangan extends CI_Model
                 'kartu_inventaris_ruangan.id' => $id_kartu_inventaris_ruangan
             ])->row();
     }
-    
+
 
     // get total rows
     // function total_rows($q = NULL)
@@ -104,7 +104,6 @@ class MRuangan extends CI_Model
                 'id_kartu_inventaris_ruangan' => $id_kartu_inventaris_ruangan
             ]);
         }
-
     }
 
     function insert($data)
@@ -114,7 +113,6 @@ class MRuangan extends CI_Model
         $this->db->update('kartu_inventaris_ruangan', ['is_valid' => 0]);
         $this->db->insert('kartu_inventaris_ruangan', ['id_lokasi' => $data['id_lokasi']]);
         $this->insertPengesahanRuangan($this->db->insert_id(), $data['id_lokasi']);
-
     }
 
     // update data
@@ -135,6 +133,13 @@ class MRuangan extends CI_Model
         $data = $this->db->get_where($this->table, ['id' => $id])->row_array();
         $this->db->where($this->id, $id);
         $this->db->update($this->table, ['is_active' => 0]);
+
+        $this->db->where($this->id, $id);
+        $this->db->update($this->table, ['deleted_at' => date('Y-m-d H:i:s')]);
+        $this->db->insert('sampah', [
+            'tabel' => $this->table,
+            'id_subjek' => $id
+        ]);
 
 
 

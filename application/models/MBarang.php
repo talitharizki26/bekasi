@@ -223,6 +223,12 @@ class MBarang extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->update($this->table, ['is_active' => 0]);
 
+        $this->db->where($this->id, $id);
+        $this->db->update($this->table, ['deleted_at' => date('Y-m-d H:i:s')]);
+        $this->db->insert('sampah', [
+            'tabel' => $this->table,
+            'id_subjek' => $id
+        ]);
 
 
         $this->db->where('id_lokasi', $data['id_lokasi']);

@@ -14,7 +14,7 @@ class Kategori extends CI_Controller
 
     public function index()
     {
-        $data['kategoris'] = $this->db->query("SELECT * FROM kategori")->result_array();
+        $data['kategoris'] = $this->db->query("SELECT * FROM kategori WHERE deleted_at IS NULL")->result_array();
         $data['page'] = 'kategori/kategori_list';
         $this->load->view('template', $data);
     }

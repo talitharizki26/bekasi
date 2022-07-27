@@ -16,7 +16,7 @@ class Petugas extends CI_Controller
     {
 
         $data = array(
-            'petugass' => $this->db->query("SELECT * FROM user")->result_array()
+            'petugass' => $this->db->query("SELECT * FROM user WHERE deleted_at IS NULL")->result_array()
         );
         $data['page'] = 'petugas/petugas_list';
         $this->load->view('template', $data);
@@ -115,7 +115,13 @@ class Petugas extends CI_Controller
         $row = $this->db->get('user')->row();
 
         if ($row) {
-            $this->db->delete('user', ['id' => $id]);
+            // $this->db->delete('user', ['id' => $id]);
+            $this->db->where('id', $id);
+            $this->db->update('user', ['deleted_at' => date('Y-m-d H:i:s')]);
+            $this->db->insert('sampah', [
+                'tabel' => 'user',
+                'id_subjek' => $id
+            ]);
             $this->session->set_flashdata('message', 'Data Petugas berhasil dihapus');
             redirect(site_url('petugas'));
         } else {

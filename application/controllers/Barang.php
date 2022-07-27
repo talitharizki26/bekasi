@@ -27,49 +27,57 @@ class Barang extends CI_Controller
         $this->db->join("kategori", "kategori.id = barang.kategori_id");
         $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
         $this->db->where('is_active', 1);
+        $this->db->where('barang.deleted_at', null);
         $data['barangs'] = $this->db->get("barang")->result_array();
 
         $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->where("kategori_id", 1);
         $this->db->join("kategori", "kategori.id = barang.kategori_id");
         $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
         $this->db->where('is_active', 1);
+        $this->db->where('barang.deleted_at', null);
+        $this->db->where("kategori_id", 1);
         $data['kiba'] = $this->db->get("barang")->result_array();
         $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->where("kategori_id", 2);
         $this->db->join("kategori", "kategori.id = barang.kategori_id");
         $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
         $this->db->where('is_active', 1);
+        $this->db->where('barang.deleted_at', null);
+        $this->db->where("kategori_id", 2);
         $data['kibb'] = $this->db->get("barang")->result_array();
         $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->where("kategori_id", 3);
         $this->db->join("kategori", "kategori.id = barang.kategori_id");
         $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
         $this->db->where('is_active', 1);
+        $this->db->where('barang.deleted_at', null);
+        $this->db->where("kategori_id", 3);
         $data['kibc'] = $this->db->get("barang")->result_array();
         $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->where("kategori_id", 4);
         $this->db->join("kategori", "kategori.id = barang.kategori_id");
         $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
         $this->db->where('is_active', 1);
+        $this->db->where('barang.deleted_at', null);
+        $this->db->where("kategori_id", 4);
         $data['kibd'] = $this->db->get("barang")->result_array();
         $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->where("kategori_id", 5);
         $this->db->join("kategori", "kategori.id = barang.kategori_id");
         $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
         $this->db->where('is_active', 1);
+        $this->db->where('barang.deleted_at', null);
+        $this->db->where("kategori_id", 5);
         $data['kibe'] = $this->db->get("barang")->result_array();
         $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->where("kategori_id", 6);
         $this->db->join("kategori", "kategori.id = barang.kategori_id");
         $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
         $this->db->where('is_active', 1);
+        $this->db->where('barang.deleted_at', null);
+        $this->db->where("kategori_id", 6);
         $data['kibf'] = $this->db->get("barang")->result_array();
         $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->where("kategori_id", 7);
         $this->db->join("kategori", "kategori.id = barang.kategori_id");
         $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
+        $this->db->where('barang.deleted_at', null);
         $this->db->where('is_active', 1);
+        $this->db->where("kategori_id", 7);
         $data['kibg'] = $this->db->get("barang")->result_array();
         if ($data) {
         }
@@ -85,6 +93,7 @@ class Barang extends CI_Controller
         $this->db->join("kategori", "kategori.id = barang.kategori_id");
         $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
         $this->db->where('is_active', 1);
+        $this->db->where('barang.deleted_at', null);
         $data['barangs'] = $this->db->get("barang")->result_array();
 
         $data['page'] = 'barang/barang_print';
@@ -128,6 +137,7 @@ class Barang extends CI_Controller
         );
         //mengambil data kategori buku
         $data['list_kategori'] = $this->MKategori->get_all();
+        $this->db->where('lokasi.deleted_at', null);
         $data['list_lokasi'] = $this->db->get('lokasi')->result();
         $data['page'] = 'barang/barang_form';
         $this->load->view('template', $data);
@@ -198,6 +208,7 @@ class Barang extends CI_Controller
 
             );
 
+            $this->db->where('lokasi.deleted_at', null);
             $data['list_lokasi'] = $this->db->get('lokasi')->result();
             $data['page'] = 'barang/barang_form';
             $this->load->view('template', $data);

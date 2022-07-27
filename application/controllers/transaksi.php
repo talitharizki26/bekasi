@@ -18,12 +18,12 @@ class Transaksi extends CI_Controller
 
         if ($this->session->hak_akses == 'admin') {
             if ($approval != null) {
-                $data['transaksi_data'] = $this->db->query("SELECT *,transaksi.id as id,barang.id as id_barang FROM transaksi INNER JOIN barang ON transaksi.kode_barang = barang.kode WHERE status = 'datang' AND approval = $approval")->result();
+                $data['transaksi_data'] = $this->db->query("SELECT *,transaksi.id as id,barang.id as id_barang FROM transaksi INNER JOIN barang ON transaksi.kode_barang = barang.kode WHERE status = 'datang' AND approval = $approval AND transaksi.deleted_at IS NULL")->result();
             } else {
-                $data['transaksi_data'] = $this->db->query("SELECT *,transaksi.id as id,barang.id as id_barang FROM transaksi INNER JOIN barang ON transaksi.kode_barang = barang.kode WHERE status = 'datang'")->result();
+                $data['transaksi_data'] = $this->db->query("SELECT *,transaksi.id as id,barang.id as id_barang FROM transaksi INNER JOIN barang ON transaksi.kode_barang = barang.kode WHERE status = 'datang' AND transaksi.deleted_at IS NULL")->result();
             }
         } else {
-            $data['transaksi_data'] = $this->db->query("SELECT *,transaksi.id as id,barang.id as id_barang FROM transaksi INNER JOIN barang ON transaksi.kode_barang = barang.kode WHERE nomor_anggota = '" . $this->session->nomor_anggota . "'")->result();
+            $data['transaksi_data'] = $this->db->query("SELECT *,transaksi.id as id,barang.id as id_barang FROM transaksi INNER JOIN barang ON transaksi.kode_barang = barang.kode WHERE nomor_anggota = '" . $this->session->nomor_anggota . "' AND transaksi.deleted_at IS NULL")->result();
         }
         $data['page'] = 'transaksi/transaksi_list';
         $this->load->view('template', $data);

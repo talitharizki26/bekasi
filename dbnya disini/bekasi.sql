@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2022 at 12:10 PM
+-- Generation Time: Jul 28, 2022 at 12:10 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -88,10 +88,10 @@ INSERT INTO `kartu_inventaris_barang` (`id`, `id_lokasi`, `status_pengesahan`, `
 (11, 1, 0, NULL, NULL, 0, '2022-04-11 01:27:23', '2022-04-11 01:27:23', NULL),
 (12, 2, 0, NULL, NULL, 0, '2022-04-11 01:31:36', '2022-04-11 01:31:36', NULL),
 (13, 2, 0, NULL, NULL, 0, '2022-04-11 01:31:53', '2022-04-11 01:31:53', NULL),
-(14, 1, 1, '648GwNduIEAYKXD', 7, 0, '2022-04-11 01:32:50', '2022-04-10 00:00:00', NULL),
+(14, 1, 1, '648GwNduIEAYKXD', 5, 0, '2022-04-11 01:32:50', '2022-04-10 00:00:00', NULL),
 (15, 1, 0, NULL, NULL, 0, '2022-06-27 01:36:53', '2022-06-27 01:36:53', NULL),
 (16, 1, 0, NULL, NULL, 0, '2022-06-27 02:32:19', '2022-06-27 02:32:19', NULL),
-(17, 2, 1, 'iTLSKJ1VFx2WrhB', 7, 1, '2022-06-27 02:32:28', '2022-07-21 00:00:00', NULL),
+(17, 2, 1, 'iTLSKJ1VFx2WrhB', 5, 1, '2022-06-27 02:32:28', '2022-07-21 00:00:00', NULL),
 (18, 1, 0, NULL, NULL, 1, '2022-07-27 15:44:16', '2022-07-27 15:44:16', NULL);
 
 -- --------------------------------------------------------
@@ -117,7 +117,7 @@ CREATE TABLE `kartu_inventaris_ruangan` (
 --
 
 INSERT INTO `kartu_inventaris_ruangan` (`id`, `id_lokasi`, `status_pengesahan`, `kode_pengesahan`, `id_camat`, `is_valid`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 'X8WK1YjYVmcIojo', 7, 1, '2022-02-05 00:43:08', '2022-02-05 00:00:00', NULL);
+(1, 1, 1, 'X8WK1YjYVmcIojo', 5, 1, '2022-02-05 00:43:08', '2022-02-05 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -316,12 +316,12 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id`, `kode_barang`, `nomor_anggota`, `tanggal_datang`, `tanggal_distribusi`, `status`, `bap`, `approval`, `waktu`, `deleted_at`) VALUES
-(5, '0011006', '007', '2021-06-10 00:00:00', '2021-06-11 00:00:00', 'dikirim', 'contoh.pdf', 1, 'Pagi', NULL),
-(6, '0011006', '007', '2021-06-10 00:00:00', '2021-06-10 00:00:00', 'datang', 'contoh.pdf', 1, 'Pagi', NULL),
-(7, '0011006', '006', '2022-01-10 00:00:00', '2022-01-15 00:00:00', 'datang', 'contoh.pdf', 2, 'Pagi', NULL),
-(8, '8999555', '006', '2022-01-19 00:00:00', '2022-02-04 00:00:00', 'datang', 'contoh.pdf', 0, 'Pagi', NULL),
-(9, '8999555', '006', '2022-01-12 00:00:00', '2022-01-14 00:00:00', 'datang', 'contoh.pdf', 0, 'Pagi', NULL),
-(10, 'p001', '006', '2022-01-15 00:00:00', '2022-02-05 00:00:00', 'datang', 'SURAT-PENGANTAR-PENGAMBILAN-IJAZAH1.pdf', 0, 'Pagi', NULL);
+(5, '0011006', '004', '2021-06-10 00:00:00', '2021-06-11 00:00:00', 'dikirim', 'contoh.pdf', 1, 'Pagi', NULL),
+(6, '0011006', '004', '2021-06-10 00:00:00', '2021-06-10 00:00:00', 'datang', 'contoh.pdf', 1, 'Pagi', NULL),
+(7, '0011006', '003', '2022-01-10 00:00:00', '2022-01-15 00:00:00', 'datang', 'contoh.pdf', 2, 'Pagi', NULL),
+(8, '8999555', '003', '2022-01-19 00:00:00', '2022-02-04 00:00:00', 'datang', 'contoh.pdf', 0, 'Pagi', NULL),
+(9, '8999555', '003', '2022-01-12 00:00:00', '2022-01-14 00:00:00', 'datang', 'contoh.pdf', 0, 'Pagi', NULL),
+(10, 'p001', '003', '2022-01-15 00:00:00', '2022-02-05 00:00:00', 'datang', 'SURAT-PENGANTAR-PENGAMBILAN-IJAZAH1.pdf', 0, 'Pagi', NULL);
 
 -- --------------------------------------------------------
 
@@ -347,12 +347,12 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `password`, `nama_operator`, `nomor_anggota`, `hak_akses`, `id_kecamatan`, `deleted_at`) VALUES
 (1, 'admin', 'admin', 'Admin', '001', 'admin', NULL, NULL),
 (2, 'dediajalah', '12345678', 'dedi', '002', 'admin', NULL, NULL),
-(5, 'bedul', '12345678', 'Bedul', '006', 'petugas', 1, NULL),
-(6, 'kusno', '12345678', 'kusno', '007', 'petugas', 1, NULL),
-(7, 'andini', '1234', 'Andini Septia', '008', 'kecamatan', 1, NULL),
-(8, 'sentaurus', '1234', 'Senta Ruslamon', '009', 'pengelola', 1, NULL),
-(9, 'sem', '1234', 'Solihin Emda', '010', 'kelurahan', 1, NULL),
-(10, 'darwin', '1234', 'Darwin', '011', 'kecamatan', 2, NULL);
+(3, 'bedul', '12345678', 'Bedul', '003', 'petugas', 1, NULL),
+(4, 'kusno', '12345678', 'kusno', '004', 'petugas', 1, NULL),
+(5, 'andini', '1234', 'Andini Septia', '005', 'kecamatan', 1, NULL),
+(6, 'sentaurus', '1234', 'Senta Ruslamon', '006', 'pengelola', 1, NULL),
+(7, 'sem', '1234', 'Solihin Emda', '007', 'kelurahan', 1, NULL),
+(8, 'darwin', '1234', 'Darwin', '008', 'kecamatan', 2, NULL);
 
 --
 -- Indexes for dumped tables
@@ -429,7 +429,8 @@ ALTER TABLE `transaksi`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nomor_anggota` (`nomor_anggota`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -505,7 +506,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

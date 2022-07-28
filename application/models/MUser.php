@@ -33,6 +33,17 @@ class MUser extends CI_Model
         $this->db->where('username', $username);
         return $this->db->get($this->table)->row();
     }
+
+    public function nomor_anggota()
+    {
+        $query     = "SELECT MAX(TRIM(nomor_anggota)) as nomor_anggota
+             FROM user";
+        $baris = $this->db->query($query);
+        $akhir = $baris->row()->nomor_anggota;
+        $akhir++;
+        $nomor_anggota    = str_pad($akhir, 3, "0", STR_PAD_LEFT);
+        return $nomor_anggota;
+    }
 }
 
 /* End of file MBarang.php */

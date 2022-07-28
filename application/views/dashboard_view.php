@@ -231,8 +231,8 @@
 										<th><?= $no++; ?></th>
 										<td><?= $row->kode_barang ?></td>
 										<td><?= $row->nomor_anggota ?></td>
-										<td><?= $row->tanggal_datang ?></td>
-										<td><?= $row->tanggal_distribusi ?></td>
+										<td><?= cari_tanggal($row->tanggal_datang) ?></td>
+										<td><?= cari_tanggal($row->tanggal_distribusi) ?></td>
 										<td><?= $row->status ?></td>
 										<td><?= $row->waktu ?></td>
 										<td><a href="" class="btn btn-primary">Lihat</a></td>

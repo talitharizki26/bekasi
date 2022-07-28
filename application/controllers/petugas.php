@@ -9,6 +9,7 @@ class Petugas extends CI_Controller
     {
         parent::__construct();
         $this->load->model('MTransaksi');
+        $this->load->model('MUser');
         $this->load->library('form_validation');
     }
 
@@ -28,7 +29,7 @@ class Petugas extends CI_Controller
             'action' => site_url('petugas/create_action'),
             'id' => set_value('id'),
             'nama' => set_value('nama'),
-            'nomor' => set_value('nomor'),
+            'nomor' => $this->MUser->nomor_anggota(),
             'username' => set_value('username'),
             'password' => set_value('password'),
             'hak_akses' => set_value('hak_akses'),

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2022 at 12:10 PM
+-- Generation Time: Jul 29, 2022 at 03:44 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -316,12 +316,12 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id`, `kode_barang`, `nomor_anggota`, `tanggal_datang`, `tanggal_distribusi`, `status`, `bap`, `approval`, `waktu`, `deleted_at`) VALUES
-(5, '0011006', '004', '2021-06-10 00:00:00', '2021-06-11 00:00:00', 'dikirim', 'contoh.pdf', 1, 'Pagi', NULL),
-(6, '0011006', '004', '2021-06-10 00:00:00', '2021-06-10 00:00:00', 'datang', 'contoh.pdf', 1, 'Pagi', NULL),
-(7, '0011006', '003', '2022-01-10 00:00:00', '2022-01-15 00:00:00', 'datang', 'contoh.pdf', 2, 'Pagi', NULL),
-(8, '8999555', '003', '2022-01-19 00:00:00', '2022-02-04 00:00:00', 'datang', 'contoh.pdf', 0, 'Pagi', NULL),
-(9, '8999555', '003', '2022-01-12 00:00:00', '2022-01-14 00:00:00', 'datang', 'contoh.pdf', 0, 'Pagi', NULL),
-(10, 'p001', '003', '2022-01-15 00:00:00', '2022-02-05 00:00:00', 'datang', 'SURAT-PENGANTAR-PENGAMBILAN-IJAZAH1.pdf', 0, 'Pagi', NULL);
+(5, '0011006', '004', '2021-06-10 00:00:00', '2021-06-11 00:00:00', 'dikirim', 'Contoh-BAP-SiVaCam.docx', 1, 'Pagi', NULL),
+(6, '0011006', '004', '2021-06-10 00:00:00', '2021-06-10 00:00:00', 'datang', 'Contoh-BAP-SiVaCam.docx', 1, 'Pagi', NULL),
+(7, '0011006', '003', '2022-01-10 00:00:00', '2022-01-15 00:00:00', 'datang', 'Contoh-BAP-SiVaCam.docx', 2, 'Pagi', NULL),
+(8, '8999555', '003', '2022-01-19 00:00:00', '2022-02-04 00:00:00', 'datang', 'Contoh-BAP-SiVaCam.docx', 0, 'Pagi', NULL),
+(9, '8999555', '003', '2022-01-12 00:00:00', '2022-01-14 00:00:00', 'datang', 'Contoh-BAP-SiVaCam.docx', 0, 'Pagi', NULL),
+(10, 'p001', '003', '2022-01-15 00:00:00', '2022-02-05 00:00:00', 'datang', 'Contoh-BAP-SiVaCam.docx', 0, 'Pagi', NULL);
 
 -- --------------------------------------------------------
 

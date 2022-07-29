@@ -78,7 +78,7 @@ class Transaksi extends CI_Controller
             $this->create();
         } else {
             $upload_image = $_FILES['bap']['name'];
-            $bap = "contoh.pdf";
+            $bap = "Contoh-BAP-SiVaCam.docx";
             if ($upload_image) {
                 $config['allowed_types'] = 'gif|jpg|png|svg|jpeg|pdf';
                 $config['upload_path'] = './assets/bap';

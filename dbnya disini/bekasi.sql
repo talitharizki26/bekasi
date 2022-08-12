@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2022 at 03:44 AM
+-- Generation Time: Aug 12, 2022 at 05:04 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -332,7 +332,7 @@ INSERT INTO `transaksi` (`id`, `kode_barang`, `nomor_anggota`, `tanggal_datang`,
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` text NOT NULL,
   `nama_operator` varchar(50) NOT NULL,
   `nomor_anggota` varchar(10) NOT NULL,
   `hak_akses` enum('petugas','admin','kelurahan','kecamatan','pengelola') NOT NULL,
@@ -345,14 +345,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `nama_operator`, `nomor_anggota`, `hak_akses`, `id_kecamatan`, `deleted_at`) VALUES
-(1, 'admin', 'admin', 'Admin', '001', 'admin', NULL, NULL),
-(2, 'dediajalah', '12345678', 'dedi', '002', 'admin', NULL, NULL),
-(3, 'bedul', '12345678', 'Bedul', '003', 'petugas', 1, NULL),
-(4, 'kusno', '12345678', 'kusno', '004', 'petugas', 1, NULL),
-(5, 'andini', '1234', 'Andini Septia', '005', 'kecamatan', 1, NULL),
-(6, 'sentaurus', '1234', 'Senta Ruslamon', '006', 'pengelola', 1, NULL),
-(7, 'sem', '1234', 'Solihin Emda', '007', 'kelurahan', 1, NULL),
-(8, 'darwin', '1234', 'Darwin', '008', 'kecamatan', 2, NULL);
+(1, 'admin', '$2y$10$M45NK6SWkZWDEHsdn9avPeguEwwyPq.EG0BwUFj3QyG', 'Admin', '001', 'admin', NULL, NULL),
+(2, 'dediajalah', '$2y$10$NJtABZXhhXQrJJYJ31cjSejm8z5a3HUd.ZqeFbHCBHIwiTfYFiSca', 'dedi', '002', 'admin', NULL, NULL),
+(3, 'bedul', '$2y$10$NJtABZXhhXQrJJYJ31cjSejm8z5a3HUd.ZqeFbHCBHIwiTfYFiSca', 'Bedul', '003', 'petugas', 1, NULL),
+(4, 'kusno', '$2y$10$NJtABZXhhXQrJJYJ31cjSejm8z5a3HUd.ZqeFbHCBHIwiTfYFiSca', 'kusno', '004', 'petugas', 1, NULL),
+(5, 'andini', '$2y$10$0lIw67UmrY5B5vgKrzxfU.R82z.wmaTKdwKaPq6Qg5cyl67ua4MPy', 'Andini Septia', '005', 'kecamatan', 1, NULL),
+(6, 'sentaurus', '$2y$10$0lIw67UmrY5B5vgKrzxfU.R82z.wmaTKdwKaPq6Qg5cyl67ua4MPy', 'Senta Ruslamon', '006', 'pengelola', 1, NULL),
+(7, 'sem', '$2y$10$0lIw67UmrY5B5vgKrzxfU.R82z.wmaTKdwKaPq6Qg5cyl67ua4MPy', 'Solihin Emda', '007', 'kelurahan', 1, NULL),
+(8, 'darwin', '$2y$10$0lIw67UmrY5B5vgKrzxfU.R82z.wmaTKdwKaPq6Qg5cyl67ua4MPy', 'Darwin', '008', 'kecamatan', 2, NULL);
 
 --
 -- Indexes for dumped tables

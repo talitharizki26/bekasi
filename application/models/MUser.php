@@ -19,11 +19,15 @@ class MUser extends CI_Model
             $this->table,
             array(
                 'username' => $u,
-                'password' => $p
+                // 'password' => $p
             )
         );
         if ($query->num_rows() > 0) {
-            return true;
+            if (password_verify($p, $query->row()->password)) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }

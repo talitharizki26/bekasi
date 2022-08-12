@@ -40,7 +40,7 @@
                             <td>
                                 <a href="<?= base_url(); ?>kategori/update/<?= $kategori['id']; ?>" class="btn btn-primary">Edit</a>
                                 <a href="<?= base_url(); ?>kategori/delete/<?= $kategori['id']; ?>" class="btn btn-danger tombol-hapus" data-hapus="Kategori">Hapus</a>
-                                <a href="<?= base_url(); ?>barang/index/<?= $kategori['id']; ?>" class="btn btn-info">Lihat Barang</a>
+                                <a href="<?= base_url(); ?>kategori/barang/<?= $kategori['id']; ?>" class="btn btn-info">Lihat Barang</a>
                             </td>
                         </tr>
 

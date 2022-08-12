@@ -12,6 +12,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/fontawesome-free-5.15.4-web/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Ionicons -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
@@ -152,7 +153,7 @@
                             </ul>
                         </li>
 
-                        <li class="treeview">
+                        <!-- <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-check-square"></i> <span>Kondisi barang</span>
 
@@ -162,7 +163,7 @@
                                 <li><a href="<?php echo site_url() ?>kondisi/buruk"><i class="fa fa-circle-o"></i> Buruk </a></li>
                                 <li><a href="<?php echo site_url() ?>kondisi/rusak"><i class="fa fa-circle-o"></i> Rusak </a></li>
                             </ul>
-                        </li>
+                        </li> -->
 
                         <li>
                             <a href="<?php echo base_url() ?>barang">
@@ -277,6 +278,8 @@
         <script src="<?php echo base_url() ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
         <!-- jQuery UI 1.11.4 -->
         <script src="<?php echo base_url() ?>assets/bower_components/jquery-ui/jquery-ui.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.1/bootstrap-show-password.min.js" integrity="sha512-HFCs3oK0PH4zg5Kli78BTmVkaNCAwMrVMp/JuCb+/SRYeYByDTEXuaF2F9n06Ktzai0bkQMvDeMtsC+UwGaGVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>

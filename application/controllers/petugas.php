@@ -49,7 +49,7 @@ class Petugas extends CI_Controller
         } else {
             $data = array(
                 'username' => $this->input->post('username', TRUE),
-                'password' => $this->input->post('password', TRUE),
+                'password' => password_hash($this->input->post('password', TRUE), PASSWORD_DEFAULT),
                 'hak_akses' => $this->input->post('hak_akses', TRUE),
                 'nama_operator' => $this->input->post('nama', TRUE),
                 'nomor_anggota' => $this->input->post('nomor', TRUE),
@@ -76,6 +76,7 @@ class Petugas extends CI_Controller
                 'nomor' => set_value('nomor', $row->nomor_anggota),
                 'username' => set_value('username', $row->username),
                 'password' => set_value('password', $row->password),
+                'hak_akses' => set_value('hak_akses', $row->hak_akses),
                 'id_kecamatan' => set_value('id_kecamatan', $row->id_kecamatan),
             );
             $data['page'] = 'petugas/petugas_form';
@@ -96,7 +97,7 @@ class Petugas extends CI_Controller
         } else {
             $data = array(
                 'username' => $this->input->post('username', TRUE),
-                'password' => $this->input->post('password', TRUE),
+                'password' => password_hash($this->input->post('password', TRUE), PASSWORD_DEFAULT),
                 'hak_akses' => $this->input->post('hak_akses', TRUE),
                 'nama_operator' => $this->input->post('nama', TRUE),
                 'nomor_anggota' => $this->input->post('nomor', TRUE),

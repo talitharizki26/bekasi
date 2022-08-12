@@ -7,7 +7,7 @@ class Barang extends CI_Controller
 {
     function __construct()
     {
-        parent::__construct();
+        Parent::__construct();
         $this->load->model(array('MBarang', 'MKategori'));
         $this->load->library('form_validation');
     }

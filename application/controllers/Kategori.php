@@ -19,6 +19,21 @@ class Kategori extends CI_Controller
         $this->load->view('template', $data);
     }
 
+    public function barang($kategori_id = null)
+    {
+        $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
+        $this->db->join("kategori", "kategori.id = barang.kategori_id");
+        $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
+        $this->db->where('barang.kategori_id', $kategori_id);
+        $this->db->where('is_active', 1);
+        $this->db->where('barang.deleted_at', null);
+        $data['barangs'] = $this->db->get("barang")->result_array();
+
+        $data['page'] = 'kategori/barang_list';
+        $this->load->view('template', $data);
+        //$this->load->view('barang/barang_list', $data);
+    }
+
     public function read($id)
     {
         $row = $this->MKategori->get_by_id($id);

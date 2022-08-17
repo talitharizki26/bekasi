@@ -30,6 +30,7 @@
                         <th>No</th>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
+                        <th>Jumlah Barang</th>
                         <th>Tanggal Datang</th>
                         <th>Tanggal Distribusi</th>
                         <?php if ($this->session->hak_akses != 'petugas') : ?>
@@ -56,6 +57,7 @@
                             <td width="80px"><?php echo $no++ ?></td>
                             <td><?php echo $transaksi->kode_barang ?></td>
                             <td><?php echo $transaksi->nama ?></td>
+                            <td><?php echo $transaksi->jumlah_barang ?></td>
                             <td><?php echo date("d-m-Y", strtotime($transaksi->tanggal_datang)) ?></td>
                             <td><?php echo date("d-m-Y", strtotime($transaksi->tanggal_distribusi)) ?></td>
                             <?php if ($this->session->hak_akses == 'admin') : ?>

@@ -37,6 +37,7 @@ class Transaksi extends CI_Controller
                 'id' => $row->id,
                 'kode_barang' => $row->kode_barang,
                 'nomor_anggota' => $row->nomor_anggota,
+                'jumlah_barang' => $row->jumlah_barang,
                 'tanggal_datang' => $row->tanggal_datang,
                 'tanggal_distribusi' => $row->tanggal_distribusi,
                 'status' => $row->status,
@@ -60,6 +61,7 @@ class Transaksi extends CI_Controller
             'id' => set_value('id'),
             'kode_barang' => set_value('kode_barang'),
             'nomor_anggota' => set_value('nomor_anggota'),
+            'jumlah_barang' => set_value('jumlah_barang'),
             'tanggal_datang' => set_value('tanggal_datang'),
             'tanggal_distribusi' => set_value('tanggal_distribusi'),
             'waktu' => set_value('waktu'),
@@ -93,6 +95,7 @@ class Transaksi extends CI_Controller
             $data = array(
                 'kode_barang' => $this->input->post('kode_barang', TRUE),
                 'nomor_anggota' => $this->input->post('nomor_anggota', TRUE),
+                'jumlah_barang' => $this->input->post('jumlah_barang', TRUE),
                 'tanggal_datang' => $this->input->post('tanggal_datang', TRUE),
                 'tanggal_distribusi' => $this->input->post('tanggal_distribusi', TRUE),
                 'waktu' => $this->input->post('waktu', TRUE),
@@ -117,6 +120,7 @@ class Transaksi extends CI_Controller
                 'id' => set_value('id', $row->id),
                 'kode_barang' => set_value('kode_barang', $row->kode_barang),
                 'nomor_anggota' => set_value('nomor_anggota', $row->nomor_anggota),
+                'jumlah_barang' => set_value('jumlah_barang', $row->jumlah_barang),
                 'tanggal_datang' => set_value('tanggal_datang', $row->tanggal_datang),
                 'tanggal_distribusi' => set_value('tanggal_distribusi', $row->tanggal_distribusi),
                 'waktu' => set_value('waktu', $row->waktu),
@@ -142,6 +146,7 @@ class Transaksi extends CI_Controller
             $data = array(
                 'kode_barang' => $this->input->post('kode_barang', TRUE),
                 'nomor_anggota' => $this->input->post('nomor_anggota', TRUE),
+                'jumlah_barang' => $this->input->post('jumlah_barang', TRUE),
                 'tanggal_datang' => $this->input->post('tanggal_datang', TRUE),
                 'tanggal_distribusi' => $this->input->post('tanggal_distribusi', TRUE),
                 'waktu' => $this->input->post('waktu', TRUE),
@@ -172,6 +177,7 @@ class Transaksi extends CI_Controller
     {
         $this->form_validation->set_rules('kode_barang', 'kode barang', 'trim|required');
         $this->form_validation->set_rules('nomor_anggota', 'nomor anggota', 'trim|required');
+        $this->form_validation->set_rules('jumlah_barang', 'Jumlah Barang', 'trim|required');
         $this->form_validation->set_rules('tanggal_datang', 'tanggal datang', 'trim|required');
         $this->form_validation->set_rules('tanggal_distribusi', 'tanggal distribusi', 'trim|required');
         $this->form_validation->set_rules('status', 'status', 'trim|required');
@@ -215,6 +221,7 @@ class Transaksi extends CI_Controller
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
             xlsWriteLabel($tablebody, $kolombody++, $data->kode_barang);
             xlsWriteLabel($tablebody, $kolombody++, $data->nomor_anggota);
+            xlsWriteLabel($tablebody, $kolombody++, $data->jumlah_barang);
             xlsWriteLabel($tablebody, $kolombody++, $data->tanggal_datang);
             xlsWriteLabel($tablebody, $kolombody++, $data->tanggal_distribusi);
             xlsWriteLabel($tablebody, $kolombody++, $data->status);

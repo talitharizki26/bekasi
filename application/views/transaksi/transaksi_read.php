@@ -24,6 +24,10 @@
                     <td><?php echo $nomor_anggota; ?></td>
                 </tr>
                 <tr>
+                    <td>Jumlah Barang</td>
+                    <td><?php echo $jumlah_barang; ?></td>
+                </tr>
+                <tr>
                     <td>Tanggal Datang</td>
                     <td><?php echo $tanggal_datang; ?></td>
                 </tr>

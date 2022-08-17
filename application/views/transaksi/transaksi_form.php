@@ -30,6 +30,10 @@
                     <input type="text" class="form-control" name="nomor_anggota" id="nomor_anggota" placeholder="Nomor Anggota" value="<?= ($nomor_anggota) ? $nomor_anggota : $this->session->userdata('nomor_anggota'); ?>" readonly />
                 </div>
                 <div class="form-group">
+                    <label for="jumlah_barang">Jumlah Barang <?php echo form_error('jumlah_barang') ?><sup style="color:#f55442;">*wajib diisi</sup></label>
+                    <input type="number" class="form-control" name="jumlah_barang" id="jumlah_barang" placeholder="Jumlah Barang" value="<?= ($jumlah_barang) ? $jumlah_barang : $this->session->userdata('jumlah_barang'); ?>">
+                </div>
+                <div class="form-group">
                     <label for="datetime">Tanggal Pemakaian <?php echo form_error('tanggal_datang') ?><sup style="color:#f55442;">*wajib diisi</sup></label>
                     <input type="date" class="form-control" name="tanggal_datang" id="tanggal_datang" placeholder="Tanggal Pemakaian" value="<?= date('Y-m-d', strtotime($tanggal_datang)); ?>" />
                 </div>

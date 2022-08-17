@@ -14,15 +14,92 @@ class Barang extends CI_Controller
 
     public function index($kondisi = null, $kategori_id = null)
     {
+
+        $data['kategori_id'] = $kategori_id;
+        $data['list_kategori'] = $this->db->get('kategori')->result();
         $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        // if ($kategori_id) {
-        //     $this->db->where("kategori_id", $kategori_id);
-        // }
         if ($kondisi) {
             $this->db->where("kondisi", $kondisi);
             $data['kondisi'] = $kondisi;
         } else {
             $data['kondisi'] = null;
+        }
+
+
+        $this->db->join("kategori", "kategori.id = barang.kategori_id");
+        $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
+        $this->db->where('is_active', 1);
+        $this->db->where('barang.deleted_at', null);
+        $data['barangs'] = $this->db->get("barang")->result_array();
+
+        // $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
+        // $this->db->join("kategori", "kategori.id = barang.kategori_id");
+        // $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
+        // $this->db->where('is_active', 1);
+        // $this->db->where('barang.deleted_at', null);
+        // $this->db->where("kategori_id", 1);
+        // $data['kiba'] = $this->db->get("barang")->result_array();
+        // $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
+        // $this->db->join("kategori", "kategori.id = barang.kategori_id");
+        // $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
+        // $this->db->where('is_active', 1);
+        // $this->db->where('barang.deleted_at', null);
+        // $this->db->where("kategori_id", 2);
+        // $data['kibb'] = $this->db->get("barang")->result_array();
+        // $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
+        // $this->db->join("kategori", "kategori.id = barang.kategori_id");
+        // $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
+        // $this->db->where('is_active', 1);
+        // $this->db->where('barang.deleted_at', null);
+        // $this->db->where("kategori_id", 3);
+        // $data['kibc'] = $this->db->get("barang")->result_array();
+        // $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
+        // $this->db->join("kategori", "kategori.id = barang.kategori_id");
+        // $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
+        // $this->db->where('is_active', 1);
+        // $this->db->where('barang.deleted_at', null);
+        // $this->db->where("kategori_id", 4);
+        // $data['kibd'] = $this->db->get("barang")->result_array();
+        // $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
+        // $this->db->join("kategori", "kategori.id = barang.kategori_id");
+        // $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
+        // $this->db->where('is_active', 1);
+        // $this->db->where('barang.deleted_at', null);
+        // $this->db->where("kategori_id", 5);
+        // $data['kibe'] = $this->db->get("barang")->result_array();
+        // $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
+        // $this->db->join("kategori", "kategori.id = barang.kategori_id");
+        // $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
+        // $this->db->where('is_active', 1);
+        // $this->db->where('barang.deleted_at', null);
+        // $this->db->where("kategori_id", 6);
+        // $data['kibf'] = $this->db->get("barang")->result_array();
+        // $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
+        // $this->db->join("kategori", "kategori.id = barang.kategori_id");
+        // $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
+        // $this->db->where('barang.deleted_at', null);
+        // $this->db->where('is_active', 1);
+        // $this->db->where("kategori_id", 7);
+        // $data['kibg'] = $this->db->get("barang")->result_array();
+        // if ($data) {
+        // }
+
+        $data['page'] = 'barang/barang_list';
+        $this->load->view('template', $data);
+        //$this->load->view('barang/barang_list', $data);
+    }
+
+    public function barang_list()
+    {
+        $kondisi = $this->input->post('kondisi');
+        $kategori_id = $this->input->post('kategori_id');
+
+        $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
+        if ($kondisi) {
+            $this->db->where('kondisi', $kondisi);
+        }
+        if ($kategori_id) {
+            $this->db->where('kategori_id', $kategori_id);
         }
         $this->db->join("kategori", "kategori.id = barang.kategori_id");
         $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
@@ -30,61 +107,10 @@ class Barang extends CI_Controller
         $this->db->where('barang.deleted_at', null);
         $data['barangs'] = $this->db->get("barang")->result_array();
 
-        $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->join("kategori", "kategori.id = barang.kategori_id");
-        $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
-        $this->db->where('is_active', 1);
-        $this->db->where('barang.deleted_at', null);
-        $this->db->where("kategori_id", 1);
-        $data['kiba'] = $this->db->get("barang")->result_array();
-        $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->join("kategori", "kategori.id = barang.kategori_id");
-        $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
-        $this->db->where('is_active', 1);
-        $this->db->where('barang.deleted_at', null);
-        $this->db->where("kategori_id", 2);
-        $data['kibb'] = $this->db->get("barang")->result_array();
-        $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->join("kategori", "kategori.id = barang.kategori_id");
-        $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
-        $this->db->where('is_active', 1);
-        $this->db->where('barang.deleted_at', null);
-        $this->db->where("kategori_id", 3);
-        $data['kibc'] = $this->db->get("barang")->result_array();
-        $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->join("kategori", "kategori.id = barang.kategori_id");
-        $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
-        $this->db->where('is_active', 1);
-        $this->db->where('barang.deleted_at', null);
-        $this->db->where("kategori_id", 4);
-        $data['kibd'] = $this->db->get("barang")->result_array();
-        $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->join("kategori", "kategori.id = barang.kategori_id");
-        $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
-        $this->db->where('is_active', 1);
-        $this->db->where('barang.deleted_at', null);
-        $this->db->where("kategori_id", 5);
-        $data['kibe'] = $this->db->get("barang")->result_array();
-        $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->join("kategori", "kategori.id = barang.kategori_id");
-        $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
-        $this->db->where('is_active', 1);
-        $this->db->where('barang.deleted_at', null);
-        $this->db->where("kategori_id", 6);
-        $data['kibf'] = $this->db->get("barang")->result_array();
-        $this->db->select("*, kategori.nama AS nama_kategori, barang.nama AS nama_barang, barang.id AS id_barang");
-        $this->db->join("kategori", "kategori.id = barang.kategori_id");
-        $this->db->join("lokasi", "lokasi.id = barang.id_lokasi");
-        $this->db->where('barang.deleted_at', null);
-        $this->db->where('is_active', 1);
-        $this->db->where("kategori_id", 7);
-        $data['kibg'] = $this->db->get("barang")->result_array();
-        if ($data) {
-        }
-
-        $data['page'] = 'barang/barang_list';
-        $this->load->view('template', $data);
-        //$this->load->view('barang/barang_list', $data);
+        $data['kondisi'] = $kondisi;
+        $data['kategori'] = $this->db->get_where('kategori', ['id' => $kategori_id])->row();
+        $data['kategori_id'] = $kategori_id;
+        $this->load->view('barang/list', $data);
     }
 
     public function cetak()

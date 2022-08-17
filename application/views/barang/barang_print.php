@@ -1,4 +1,9 @@
 <!-- Main content -->
+<style type="text/css" media="print">
+    @page {
+        size: landscape;
+    }
+</style>
 <section class="content">
     <div class="row text-center">
         <h2>List Data Barang</h2>
@@ -18,30 +23,30 @@
                                 <th>Kategori</th>
                                 <th>Lokasi</th>
                                 <th>Tanggal Pengadaan</th>
-                                <th>Kondisi</th>
+                                <!-- <th>Kondisi</th> -->
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
-                        $no = 1;
-                        foreach($barangs as $barang) : ?>
                             <?php
+                            $no = 1;
+                            foreach ($barangs as $barang) : ?>
+                                <?php
                                 $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
-                            ?>
-                            <tr>
-                                <td><?= $no++;?></td>
-                                <td><?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode("'$barang[kode]'", $generator::TYPE_CODE_128)) . '">'; ?></td>
-                                <td><?= $barang['kode'];?></td>
-                                <td><?= $barang['nama_barang'];?></td>
-                                <td><?= $barang['nama_kategori'];?></td>
-                                <td><?= $barang['nama_lokasi'];?></td>
-                                <td><?= cari_tanggal($barang['tanggal_pengadaan']);?></td>
-                                <td><?= $barang['kondisi'];?></td>
-                                <td><?= $barang['keterangan'];?></td>
-                            </tr>
+                                ?>
+                                <tr>
+                                    <td><?= $no++; ?></td>
+                                    <td><?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode("'$barang[kode]'", $generator::TYPE_CODE_128)) . '" style="width:300px;">'; ?></td>
+                                    <td><?= $barang['kode']; ?></td>
+                                    <td><?= $barang['nama_barang']; ?></td>
+                                    <td><?= $barang['nama_kategori']; ?></td>
+                                    <td><?= $barang['nama_lokasi']; ?></td>
+                                    <td><?= cari_tanggal($barang['tanggal_pengadaan']); ?></td>
+                                    <!-- <td><?= $barang['kondisi']; ?></td> -->
+                                    <td><?= $barang['keterangan']; ?></td>
+                                </tr>
 
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

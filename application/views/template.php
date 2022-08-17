@@ -153,7 +153,7 @@
                             </ul>
                         </li>
 
-                        <!-- <li class="treeview">
+                        <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-check-square"></i> <span>Kondisi barang</span>
 
@@ -163,7 +163,7 @@
                                 <li><a href="<?php echo site_url() ?>kondisi/buruk"><i class="fa fa-circle-o"></i> Buruk </a></li>
                                 <li><a href="<?php echo site_url() ?>kondisi/rusak"><i class="fa fa-circle-o"></i> Rusak </a></li>
                             </ul>
-                        </li> -->
+                        </li>
 
                         <li>
                             <a href="<?php echo base_url() ?>barang">
@@ -302,6 +302,37 @@
                     }
                 })
             });
+            $('.kategori-barang').on('click', function(e) {
+                const kondisi = $('#kondisi').val();
+                const kategori_id = $(this).data('kategori');
+                $.ajax({
+                    url: "<?= base_url('barang/barang_list') ?>",
+                    type: "post",
+                    data: {
+                        'kondisi': kondisi,
+                        'kategori_id': kategori_id,
+                    },
+                    success: function(data) {
+                        $('#barang_list').html(data);
+                    }
+                });
+            });
+            $('.kondisi-barang').on('click', function(e) {
+                const kondisi = $(this).data('kondisi');
+                const kategori_id = $('#kategori_id').val();
+                $.ajax({
+                    url: "<?= base_url('barang/barang_list') ?>",
+                    type: "post",
+                    data: {
+                        'kondisi': kondisi,
+                        'kategori_id': kategori_id,
+                    },
+                    success: function(data) {
+                        $('#barang_list').html(data);
+                    }
+                });
+            });
+
             $.widget.bridge('uibutton', $.ui.button);
             $(function() {
                 $('#example1').DataTable({

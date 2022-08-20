@@ -231,11 +231,11 @@
                                 <i class="fa fa-credit-card"></i> <span>Kartu Inventaris Barang</span>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="<?php echo base_url('laporan/ruangan'); ?>">
                                 <i class="fa fa-credit-card"></i> <span>Kartu Inventaris Ruangan</span>
                             </a>
-                        </li>
+                        </li> -->
                     <?php elseif ($this->session->hak_akses == 'kecamatan') : ?>
                         <li>
                             <a href="<?php echo base_url('pengesahan/'); ?>">

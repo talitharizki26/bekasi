@@ -238,6 +238,11 @@
                         </li> -->
                     <?php elseif ($this->session->hak_akses == 'kecamatan') : ?>
                         <li>
+                            <a href="<?php echo base_url('user/profile'); ?>">
+                                <i class="fa fa-user"></i> <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="<?php echo base_url('pengesahan/'); ?>">
                                 <i class="fa fa-file"></i> <span>Pengesahan</span>
                             </a>
@@ -332,6 +337,8 @@
                     }
                 });
             });
+
+
 
             $.widget.bridge('uibutton', $.ui.button);
             $(function() {

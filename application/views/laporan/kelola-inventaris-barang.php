@@ -23,7 +23,7 @@
 						</div>
 						<div class="form-group">
 							<label for="id_barang" class="col-sm-4 control-label">Kode Aset / Barang</label>
-							<div class="col-sm-8">
+							<div class="col-sm-8" id="opsi-barang">
 								<select class="form-control" id="id_barang" name="id_barang">
 									<option value="" selected disabled>Pilih Kode Barang</option>
 									<?php foreach ($data_barang as $barang) : ?>
@@ -58,6 +58,38 @@
 								<input type="text" class="form-control" name="keterangan" id="keterangan" readonly>
 							</div>
 						</div>
+						<div class="form-group">
+							<label for="periode" class="col-sm-4 control-label">Periode</label>
+							<div class="col-sm-8">
+								<select name="periode" id="periode" class="form-control pilih-periode">
+									<option value="" selected disabled>Pilih Periode</option>
+									<option value="triwulan" <?= ($periode == "triwulan") ? "selected" : "" ?>>Triwulan</option>
+									<option value="semester" <?= ($periode == "semester") ? "selected" : "" ?>>Semester</option>
+									<option value="tahunan" <?= ($periode == "tahunan") ? "selected" : "" ?>>Tahunan</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="index" class="col-sm-4 control-label">Indeks</label>
+							<div class="col-sm-8" id="opsi-index">
+								<select name="index" id="index" class="form-control pilih-index">
+									<option value="" selected disabled>Pilih Indeks</option>
+									<?php if ($periode == 'triwulan') : ?>
+										<option value="1" <?= ($index == 1) ? "selected" : "" ?>>1</option>
+										<option value="2" <?= ($index == 2) ? "selected" : "" ?>>2</option>
+										<option value="3" <?= ($index == 3) ? "selected" : "" ?>>3</option>
+										<option value="4" <?= ($index == 4) ? "selected" : "" ?>>4</option>
+									<?php elseif ($periode == 'semester') : ?>
+										<option value="1" <?= ($index == 1) ? "selected" : "" ?>>1</option>
+										<option value="2" <?= ($index == 2) ? "selected" : "" ?>>2</option>
+									<?php elseif ($periode == 'tahunan') : ?>
+										<?php foreach ($data_tahun as $tahun) : ?>
+											<option value="<?= $tahun->tahun ?>" <?= ($index == $tahun->tahun) ? "selected" : "" ?>><?= $tahun->tahun ?></option>
+										<?php endforeach; ?>
+									<?php endif; ?>
+								</select>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="row">
@@ -69,7 +101,7 @@
 				</div>
 			</form>
 			<hr>
-			<div class="row">
+			<div class="row tabel-barang">
 
 				<table id="example1" class="table table-bordered" style="margin-bottom: 10px; margin-left: 20px; margin-right: 20px;">
 					<thead>
@@ -89,7 +121,7 @@
 						foreach ($data_inventaris as $inventaris) : ?>
 							<tr>
 								<td>
-									<a href="<?= base_url('laporan/hapus_inventaris_barang/' . $inventaris->id_barang) ?>" class="btn btn-default btn-sm" title="Hapus"><i class="fas fa-trash-alt"></i></a>
+									<a href="<?= base_url('laporan/hapus_inventaris_barang/' . $inventaris->id_barang) . "?periode=" . $periode . "&index=" . $index ?>" class="btn btn-default btn-sm" title="Hapus"><i class="fas fa-trash-alt"></i></a>
 									<button type="button" class="btn btn-default btn-sm modalBarang" id="modalBarang" title="Detail" data-toggle="modal" data-target="#barangModal" data-id="<?= $inventaris->id_barang ?>"><i class="fas fa-eye"></i></button>
 								</td>
 								<td><?= $no++; ?></td>
@@ -104,6 +136,7 @@
 				</table>
 			</div>
 		</div>
+	</div>
 </section>
 
 <!-- Modal -->
@@ -219,5 +252,52 @@
 				modal_lokasi.value = data.nama_lokasi
 			]);
 
+	});
+
+	$('.pilih-periode').on('change', function() {
+		const periode = $(this).val();
+		const id_lokasi = <?= $id_lokasi ?>;
+		$.ajax({
+			url: "<?= base_url('laporan/list_index') ?>",
+			type: "post",
+			data: {
+				'periode': periode,
+				'id_lokasi': id_lokasi,
+			},
+			success: function(data) {
+				$('#opsi-index').html(data);
+			}
+		});
+	});
+
+	$('.pilih-index').on('change', function() {
+		const periode = $("#periode").val();
+		const index = $(this).val();
+		const id_lokasi = <?= $id_lokasi ?>;
+		$.ajax({
+			url: "<?= base_url('laporan/tabel_barang') ?>",
+			type: "post",
+			data: {
+				'index': index,
+				'periode': periode,
+				'id_lokasi': id_lokasi,
+			},
+			success: function(data) {
+
+				$('.tabel-barang').html(data);
+			}
+		});
+		$.ajax({
+			url: "<?= base_url('laporan/list_barang') ?>",
+			type: "post",
+			data: {
+				'index': index,
+				'periode': periode,
+				'id_lokasi': id_lokasi,
+			},
+			success: function(data) {
+				$('#opsi-barang').html(data);
+			}
+		});
 	});
 </script>

@@ -68,6 +68,27 @@ class dashboard extends CI_Controller
             $data['num_transaksi_diterima'] = $this->db->query("SELECT * FROM transaksi WHERE approval = 1 AND MONTH(tanggal_datang) = MONTH(NOW()) AND YEAR(tanggal_datang) = YEAR(NOW())")->num_rows();
             $data['num_transaksi_ditolak'] = $this->db->query("SELECT * FROM transaksi WHERE approval = 2 AND MONTH(tanggal_datang) = MONTH(NOW()) AND YEAR(tanggal_datang) = YEAR(NOW())")->num_rows();
             $data['transaksi_pending'] = $this->db->get_where('transaksi', ['approval' => 0])->result();
+        } elseif ($this->session->userdata('hak_akses') == 'pengelola') {
+            $data['kecamatan'] = $this->db->get_where('kecamatan', ['id' => $this->session->userdata('id_kecamatan')])->row();
+            $this->db->select('*, kartu_inventaris_barang.id AS id_kartu_inventaris_barang');
+            $this->db->join('lokasi', 'lokasi.id = kartu_inventaris_barang.id_lokasi');
+            $this->db->order_by('created_at', 'DESC');
+            $data['barang'] = $this->db->get_where('kartu_inventaris_barang', [
+                'status_pengesahan' => 1,
+                'is_valid' => 1,
+                'closed_at' => null,
+                'id_kecamatan' => $this->session->userdata('id_kecamatan'),
+            ]);
+
+            $this->db->select('*, kartu_inventaris_ruangan.id AS id_kartu_inventaris_ruangan');
+            $this->db->join('lokasi', 'lokasi.id = kartu_inventaris_ruangan.id_lokasi');
+            $this->db->order_by('created_at', 'DESC');
+            $data['ruangan'] = $this->db->get_where('kartu_inventaris_ruangan', [
+                'status_pengesahan' => 1,
+                'is_valid' => 1,
+                'closed_at' => null,
+                'id_kecamatan' => $this->session->userdata('id_kecamatan'),
+            ]);
         }
         $this->load->view('template', $data);
         //$this->load->view('dashboard_view',);

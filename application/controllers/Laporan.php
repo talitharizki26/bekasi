@@ -44,6 +44,37 @@ class Laporan extends CI_Controller
             'data_inventaris' => $this->MBarang->get_inventaris_barang($id_lokasi, $id_kategori),
         ]);
     }
+    public function pilih_triwulan($id_lokasi = null, $id_kategori = null)
+    {
+        $this->load->view('template', [
+            'page' => 'laporan/pilih-triwulan',
+            'lokasi' =>  $this->MBarang->get_barang_by_lokasi($id_lokasi),
+            'id_lokasi' =>  $id_lokasi,
+            'data_barang' => $this->MBarang->get_non_inventaris_barang($id_lokasi, $id_kategori),
+            'data_inventaris' => $this->MBarang->get_inventaris_barang($id_lokasi, $id_kategori),
+        ]);
+    }
+    public function pilih_semester($id_lokasi = null, $id_kategori = null)
+    {
+        $this->load->view('template', [
+            'page' => 'laporan/pilih-semester',
+            'lokasi' =>  $this->MBarang->get_barang_by_lokasi($id_lokasi),
+            'id_lokasi' =>  $id_lokasi,
+            'data_barang' => $this->MBarang->get_non_inventaris_barang($id_lokasi, $id_kategori),
+            'data_inventaris' => $this->MBarang->get_inventaris_barang($id_lokasi, $id_kategori),
+        ]);
+    }
+    public function pilih_tahun($id_lokasi = null, $id_kategori = null)
+    {
+        $this->load->view('template', [
+            'page' => 'laporan/pilih-tahun',
+            'lokasi' =>  $this->MBarang->get_barang_by_lokasi($id_lokasi),
+            'id_lokasi' =>  $id_lokasi,
+            'data_tahun' => $this->MBarang->get_data_tahun($id_lokasi, $id_kategori),
+            'data_barang' => $this->MBarang->get_non_inventaris_barang($id_lokasi, $id_kategori),
+            'data_inventaris' => $this->MBarang->get_inventaris_barang($id_lokasi, $id_kategori),
+        ]);
+    }
     public function kelola_barang($id_lokasi = null, $id_kategori = null)
     {
         if (!empty($this->input->get('periode'))) {
@@ -51,11 +82,65 @@ class Laporan extends CI_Controller
         } else {
             $periode = "all";
         }
+        if (!empty($this->input->get('index'))) {
+            $index = $this->input->get('index');
+        } else {
+            $index = "all";
+        }
         $this->load->view('template', [
             'page' => 'laporan/kelola-inventaris-barang',
+            'periode' => $periode,
+            'id_kategori' => $id_kategori,
+            'id_lokasi' => $id_lokasi,
+            'index' => $index,
             'lokasi' =>  $this->MBarang->get_barang_by_lokasi($id_lokasi),
+            'data_tahun' => $this->MBarang->get_data_tahun($id_lokasi, $id_kategori),
+            'data_barang' => $this->MBarang->get_non_inventaris_barang($id_lokasi, $id_kategori, $periode, $index),
+            'data_inventaris' => $this->MBarang->get_inventaris_barang($id_lokasi, $id_kategori, $periode, $index),
+        ]);
+    }
+
+    public function list_index()
+    {
+        $periode = $this->input->post("periode");
+        $id_lokasi = $this->input->post("id_lokasi");
+        $id_kategori = null;
+        $this->load->view('laporan/opsi-index', [
+            'periode' => $periode,
+            'id_lokasi' => $id_lokasi,
+            'id_kategori' => $id_kategori,
+            'data_tahun' => $this->MBarang->get_data_tahun($id_lokasi, $id_kategori),
+        ]);
+    }
+    public function list_barang()
+    {
+        $periode = $this->input->post("periode");
+        $index = $this->input->post("index");
+        $id_lokasi = $this->input->post("id_lokasi");
+        $id_kategori = null;
+        $this->load->view('laporan/opsi-barang', [
+            'periode' => $periode,
+            'id_lokasi' => $id_lokasi,
+            'id_kategori' => $id_kategori,
+            'data_barang' => $this->MBarang->get_non_inventaris_barang($id_lokasi, $id_kategori, $periode, $index),
+        ]);
+    }
+
+    public function tabel_barang()
+    {
+        $periode = $this->input->post("periode");
+        $index = $this->input->post("index");
+        $id_lokasi = $this->input->post("id_lokasi");
+        $id_kategori = null;
+        $this->load->view('laporan/tabel-barang', [
+            'periode' => $periode,
+            'index' => $index,
+            'id_lokasi' => $id_lokasi,
+            'id_kategori' => $id_kategori,
+            'lokasi' =>  $this->MBarang->get_barang_by_lokasi($id_lokasi),
+            'data_tahun' => $this->MBarang->get_data_tahun($id_lokasi, $id_kategori),
             'data_barang' => $this->MBarang->get_non_inventaris_barang($id_lokasi, $id_kategori),
-            'data_inventaris' => $this->MBarang->get_inventaris_barang($id_lokasi, $id_kategori, $periode),
+            'data_inventaris' => $this->MBarang->get_inventaris_barang($id_lokasi, $id_kategori, $periode, $index),
         ]);
     }
 
@@ -78,7 +163,31 @@ class Laporan extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             Data Inventaris berhasil ditambahkan
             </div>');
-        redirect($_SERVER['HTTP_REFERER']);
+        $id_lokasi = $this->input->post('id_lokasi');
+        $periode = $this->input->post('periode');
+        $index = $this->input->post('index');
+        $bulan = date("m", strtotime($this->input->post('tanggal_pengadaan')));
+        $tahun = date("Y", strtotime($this->input->post('tanggal_pengadaan')));
+        if ($periode == "triwulan") {
+            if ($bulan <= 3) {
+                $index = 1;
+            } elseif ($bulan <= 6) {
+                $index = 2;
+            } elseif ($bulan <= 9) {
+                $index = 3;
+            } elseif ($bulan <= 12) {
+                $index = 4;
+            }
+        } elseif ($periode == "semester") {
+            if ($bulan <= 6) {
+                $index = 1;
+            } elseif ($bulan <= 12) {
+                $index = 2;
+            }
+        } elseif ($periode == "tahunan") {
+            $index = $tahun;
+        }
+        redirect("laporan/kelola_barang/$id_lokasi?periode=$periode&index=$index");
     }
 
     public function hapus_inventaris_barang($id_barang = null)
@@ -87,7 +196,7 @@ class Laporan extends CI_Controller
         $this->db->update('barang', ['is_inventaris' => 0]);
         $barang = $this->db->get_where('barang', ['id' => $id_barang])->row();
 
-        $this->db->where('id_lokasi', $this->input->post('id_lokasi'));
+        $this->db->where('id_lokasi', $barang->id_lokasi);
         $this->db->update('kartu_inventaris_barang', ['is_valid' => 0]);
         $this->db->insert('kartu_inventaris_barang', ['id_lokasi' => $barang->id_lokasi]);
         $this->MBarang->insertPengesahanBarang($id_barang, $barang->id_lokasi);
@@ -95,7 +204,10 @@ class Laporan extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             Data Inventaris berhasil dihapus
             </div>');
-        redirect($_SERVER['HTTP_REFERER']);
+        $id_lokasi = $barang->id_lokasi;
+        $periode = $this->input->get('periode');
+        $index = $this->input->get('index');
+        redirect("laporan/kelola_barang/$id_lokasi?periode=$periode&index=$index");
     }
 
     public function kartuInventarisBarang($id_kartu_inventaris_barang = null, $id_kategori = null)
@@ -139,5 +251,22 @@ class Laporan extends CI_Controller
             'lokasi' =>  $this->MRuangan->get_kartu_inventaris_ruangan($id_kartu_inventaris_ruangan),
             'data_ruangan' => $this->MRuangan->get_join_by_id_lokasi($id_kartu_inventaris_ruangan),
         ]);
+    }
+
+    public function TutupKartuInventarisBarang($id_kartu_inventaris_barang = null)
+    {
+        $this->db->where('id', $id_kartu_inventaris_barang);
+        $this->db->update('kartu_inventaris_barang', [
+            'closed_at' => date("Y-m-d H:i:s")
+        ]);
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+    public function TutupKartuInventarisRuangan($id_kartu_inventaris_ruangan = null)
+    {
+        $this->db->where('id', $id_kartu_inventaris_ruangan);
+        $this->db->update('kartu_inventaris_ruangan', [
+            'closed_at' => date("Y-m-d H:i:s")
+        ]);
+        redirect($_SERVER['HTTP_REFERER']);
     }
 }

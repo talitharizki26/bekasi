@@ -1,11 +1,11 @@
 <section class="content-header">
 	<h1>
 		Kartu Inventaris Barang
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Kartu Inventaris Barang</li>
-    </ol>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active">Kartu Inventaris Barang</li>
+	</ol>
 </section>
 <!-- Main content -->
 <section class="content">
@@ -34,12 +34,12 @@
 				<div class="col-lg-6">
 				</div>
 			</div>
-			<?php if ($lokasi->status_pengesahan == 1): ?>
+			<?php if ($lokasi->status_pengesahan == 1) : ?>
 				<div class="alert alert-success mt-3" role="alert" style="margin-top: 10px" id="hilang1">
 					Status Pengesahan : Sudah disahkan
 				</div>
 				<a href="#" onclick="printKartu()" class="btn btn-primary" id="hilang2"> <i class="fa fa-print"></i> Print </a>
-			<?php else: ?>
+			<?php else : ?>
 				<div class="alert alert-danger mt-3" role="alert" style="margin-top: 10px" id="hilang1">
 					Status Pengesahan : Belum disahkan
 				</div>
@@ -58,39 +58,61 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php 
+					<?php
 					$no = 1;
-					foreach($data_barang as $barang) : ?>
+					foreach ($data_barang as $barang) : ?>
 						<tr>
 							<td><?= $no++; ?></td>
-							<td><?= $barang->nama_barang;?></td>
-							<td><?= $barang->kode;?></td>
-							<td><?= $barang->jenis;?></td>
-							<td><?= $barang->nama_kategori;?></td>
-							<td><?= $barang->nama_lokasi;?></td>
-							<td><?= cari_tanggal($barang->tanggal_pengadaan);?></td>
+							<td><?= $barang->nama_barang; ?></td>
+							<td><?= $barang->kode; ?></td>
+							<td><?= $barang->jenis; ?></td>
+							<td><?= $barang->nama_kategori; ?></td>
+							<td><?= $barang->nama_lokasi; ?></td>
+							<td><?= cari_tanggal($barang->tanggal_pengadaan); ?></td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>
 			</table>
 			<div class="row">
-				<div class="col-lg-8"></div>
 				<div class="col-lg-4 text-center text-bold">
 					Mengetahui
 					<br>
-					Camat <?= $lokasi->nama_kecamatan ?>
+					Staff Pengelola
 					<br>
-					Bekasi, 
-					<?php if ($lokasi->kode_pengesahan): ?>
+					Bekasi, <?= cari_tanggal($lokasi->created_at) ?>
+					<?php if ($lokasi->id_staff) : ?>
+						<?php
+						$staff = $this->db->get_where('user', ['id' => $lokasi->id_staff])->row();
+						?>
+						<br>
+						<img src="<?= site_url('login/qrcode/' . $staff->username . '/3') ?>">
+						<br>
+						<?= $staff->nama_operator ?>
+					<?php endif ?>
+					<br>
+					<hr style="margin-top:0;">
+				</div>
+				<div class="col-lg-4"></div>
+				<div class="col-lg-4 text-center text-bold">
+					<!-- Mengetahui -->
+					<br>
+					Bekasi,
+					<?php if ($lokasi->kode_pengesahan) : ?>
 						<?= cari_tanggal($lokasi->updated_at) ?>
 						<br>
-						<img src="<?= site_url('login/qrcode/'.$lokasi->kode_pengesahan.'/3') ?>">
-					<?php elseif($this->session->userdata('hak_akses') == 'kecamatan'): ?>
+						Camat <?= $lokasi->nama_kecamatan ?>
+						<br>
+						<img src="<?= site_url('login/qrcode/' . $lokasi->kode_pengesahan . '/3') ?>">
+					<?php elseif ($this->session->userdata('hak_akses') == 'kecamatan') : ?>
+						<br>
+						Camat <?= $lokasi->nama_kecamatan ?>
 						<br>
 						<div class="row" style="padding: 20px">
-							<a href="<?= base_url('pengesahan/pengesahanBarang/'.$lokasi->id_kartu_inventaris_barang) ?>" class="btn btn-success"><i class="fa fa-edit"></i> Tandatangani Laporan</a>
+							<a href="<?= base_url('pengesahan/pengesahanBarang/' . $lokasi->id_kartu_inventaris_barang) ?>" class="btn btn-success"><i class="fa fa-edit"></i> Tandatangani Laporan</a>
 						</div>
-					<?php else: ?>
+					<?php else : ?>
+						<br>
+						Camat <?= $lokasi->nama_kecamatan ?>
 						<br>
 						<br>
 						<br>
@@ -98,12 +120,12 @@
 						<br>
 						<br>
 					<?php endif ?>
-					<?php if ($lokasi->id_camat): ?>
-						<?php 
+					<?php if ($lokasi->id_camat) : ?>
+						<?php
 						$camat = $this->db->get_where('user', ['id' => $lokasi->id_camat])->row();
-						 ?>
-						 <br>
-						<?= $camat->nama_operator ?>	
+						?>
+						<br>
+						<?= $camat->nama_operator ?>
 					<?php endif ?>
 					<br>
 					<!-- <?= $lokasi->nama_operator ?>	 -->
@@ -115,11 +137,11 @@
 </section>
 
 <script>
-function printKartu() {
-  var x = document.getElementById("hilang1");
-  var y = document.getElementById("hilang2");
-    x.style.display = "none";
-    y.style.display = "none";
-    window.print();
-}
+	function printKartu() {
+		var x = document.getElementById("hilang1");
+		var y = document.getElementById("hilang2");
+		x.style.display = "none";
+		y.style.display = "none";
+		window.print();
+	}
 </script>

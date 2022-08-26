@@ -22,13 +22,14 @@ class User extends CI_Controller
             $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row();
             $data['page'] = 'user/profile';
             $this->load->view('template', $data);
-        } else{
+        } else {
             $id = $this->input->post('id');
-            
+
             $data = [
                 'nama_operator' => $this->input->post('nama_operator'),
                 'username' => $this->input->post('username')
             ];
+            $this->session->set_userdata("username", $this->input->post('username'));
             $this->db->where('id', $id);
             $this->db->update('user', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
@@ -37,8 +38,6 @@ class User extends CI_Controller
             redirect('user/profile');
         }
     }
-
-    
 }
 
 /* End of file Barang.php */

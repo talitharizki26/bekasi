@@ -14,10 +14,9 @@
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6" style="margin-bottom: 15px;">
-                    <a href="<?= site_url('laporan/pilih_triwulan/' . $id_lokasi . '?periode=triwulan') ?>" class="btn btn-info btn-lg btn-block">Triwulan</a>
-                    <a href="<?= site_url('laporan/pilih_semester/' . $id_lokasi . '?periode=semester') ?>" class="btn btn-info btn-lg btn-block">Semester</a>
-                    <a href="<?= site_url('laporan/pilih_tahun/' . $id_lokasi . '?periode=tahunan') ?>" class="btn btn-info btn-lg btn-block">Tahunan</a>
-                    <a href="<?= site_url('laporan/kelola_barang/' . $id_lokasi . '?periode=all') ?>" class="btn btn-info btn-lg btn-block">Semua</a>
+                    <?php foreach ($data_tahun as $tahun) : ?>
+                        <a href="<?= site_url('laporan/kelola_barang/' . $id_lokasi . '?periode=tahunan&index=' . $tahun->tahun) ?>" class="btn btn-info btn-lg btn-block">Tahun <?= $tahun->tahun ?></a>
+                    <?php endforeach; ?>
                 </div>
                 <div class="col-md-3"></div>
             </div>

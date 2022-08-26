@@ -120,6 +120,7 @@ class Laporan extends CI_Controller
         $id_kategori = null;
         $this->load->view('laporan/opsi-barang', [
             'periode' => $periode,
+            'lokasi' =>  $this->MBarang->get_barang_by_lokasi($id_lokasi),
             'id_lokasi' => $id_lokasi,
             'id_kategori' => $id_kategori,
             'data_barang' => $this->MBarang->get_non_inventaris_barang($id_lokasi, $id_kategori, $periode, $index),

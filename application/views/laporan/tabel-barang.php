@@ -38,6 +38,76 @@
 <script src="<?php echo base_url() ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo base_url() ?>assets/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script>
+    $('.modalBarang').on('click', function() {
+        // modalBarang.addEventListener('click', function() {
+        const id = $(this).data('id');
+        $.ajax({
+            url: '<?= base_url('Laporan/checkBarang?id_barang=') ?>' + id,
+            type: "post",
+            dataType: "json",
+            data: {
+                'id': id
+            },
+            success: function(data) {
+                $("#modal_nama").val(data.nama);
+                $("#modal_jenis").val(data.jenis);
+                $("#modal_kode").val(data.kode);
+                $("#modal_kategori").val(data.nama_kategori);
+                $("#modal_kondisi").val(data.kondisi);
+                $("#modal_keterangan").val(data.keterangan);
+                $("#modal_tanggal_pengadaan").val(data.tanggal_pengadaan);
+                $("#modal_lokasi").val(data.nama_lokasi);
+            }
+        });
+
+    });
+
+    $('.pilih-periode').on('change', function() {
+        const periode = $(this).val();
+        const id_lokasi = <?= $id_lokasi ?>;
+        $.ajax({
+            url: "<?= base_url('laporan/list_index') ?>",
+            type: "post",
+            data: {
+                'periode': periode,
+                'id_lokasi': id_lokasi,
+            },
+            success: function(data) {
+                $('#opsi-index').html(data);
+            }
+        });
+    });
+
+    $('.pilih-index').on('change', function() {
+        const periode = $("#periode").val();
+        const index = $(this).val();
+        const id_lokasi = <?= $id_lokasi ?>;
+        $.ajax({
+            url: "<?= base_url('laporan/tabel_barang') ?>",
+            type: "post",
+            data: {
+                'index': index,
+                'periode': periode,
+                'id_lokasi': id_lokasi,
+            },
+            success: function(data) {
+
+                $('.tabel-barang').html(data);
+            }
+        });
+        $.ajax({
+            url: "<?= base_url('laporan/list_barang') ?>",
+            type: "post",
+            data: {
+                'index': index,
+                'periode': periode,
+                'id_lokasi': id_lokasi,
+            },
+            success: function(data) {
+                $('#opsi-barang').html(data);
+            }
+        });
+    });
     $.widget.bridge('uibutton', $.ui.button);
     $(function() {
         $('#example1').DataTable({

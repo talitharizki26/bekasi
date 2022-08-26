@@ -277,7 +277,7 @@ class MBarang extends CI_Model
 
     public function getBarang($id_barang = null)
     {
-        $this->db->select('barang.*, barang.nama AS nama_barang, kategori.nama AS nama_kategori');
+        $this->db->select('barang.*, lokasi.nama_lokasi AS nama_lokasi, barang.nama AS nama_barang, kategori.nama AS nama_kategori');
         $this->db->from('barang');
         $this->db->join('lokasi', 'lokasi.id = barang.id_lokasi');
         $this->db->join('kategori', 'kategori.id = barang.kategori_id');

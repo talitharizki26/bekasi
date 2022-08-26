@@ -14,7 +14,7 @@
 		<div class="box-body">
 			<form class="form-horizontal" action="<?= base_url('laporan/tambah_inventaris_barang') ?>" method="post">
 				<div class="row">
-					<div class="col-lg-4">
+					<div class="col-lg-4" id="opsi-barang">
 						<div class="form-group">
 							<label for="id_lokasi" class="col-sm-4 control-label">Kode Pemilik/lokasi</label>
 							<div class="col-sm-8">
@@ -23,7 +23,7 @@
 						</div>
 						<div class="form-group">
 							<label for="id_barang" class="col-sm-4 control-label">Kode Aset / Barang</label>
-							<div class="col-sm-8" id="opsi-barang">
+							<div class="col-sm-8">
 								<select class="form-control" id="id_barang" name="id_barang">
 									<option value="" selected disabled>Pilih Kode Barang</option>
 									<?php foreach ($data_barang as $barang) : ?>
@@ -50,14 +50,14 @@
 								<input type="text" class="form-control" name="alamat" id="alamat" readonly>
 							</div>
 						</div>
-					</div>
-					<div class="col-lg-4">
 						<div class="form-group">
 							<label for="keterangan" class="col-sm-4 control-label">Keterangan</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" name="keterangan" id="keterangan" readonly>
 							</div>
 						</div>
+					</div>
+					<div class="col-lg-4">
 						<div class="form-group">
 							<label for="periode" class="col-sm-4 control-label">Periode</label>
 							<div class="col-sm-8">

@@ -158,7 +158,10 @@ class Laporan extends CI_Controller
 
         $this->db->where('id_lokasi', $this->input->post('id_lokasi'));
         $this->db->update('kartu_inventaris_barang', ['is_valid' => 0]);
-        $this->db->insert('kartu_inventaris_barang', ['id_lokasi' => $this->input->post('id_lokasi')]);
+        $this->db->insert('kartu_inventaris_barang', [
+            'id_lokasi' => $this->input->post('id_lokasi'),
+            'id_staff' => $this->session->userdata('id')
+        ]);
         $this->MBarang->insertPengesahanBarang($this->input->post('id_barang'), $this->input->post('id_lokasi'));
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
@@ -199,7 +202,10 @@ class Laporan extends CI_Controller
 
         $this->db->where('id_lokasi', $barang->id_lokasi);
         $this->db->update('kartu_inventaris_barang', ['is_valid' => 0]);
-        $this->db->insert('kartu_inventaris_barang', ['id_lokasi' => $barang->id_lokasi]);
+        $this->db->insert('kartu_inventaris_barang', [
+            'id_lokasi' => $barang->id_lokasi,
+            'id_staff' => $this->session->userdata('id')
+        ]);
         $this->MBarang->insertPengesahanBarang($id_barang, $barang->id_lokasi);
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">

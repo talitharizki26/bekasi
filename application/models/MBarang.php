@@ -337,7 +337,10 @@ class MBarang extends CI_Model
         $this->db->insert($this->table, $data);
         $this->db->where('id_lokasi', $data['id_lokasi']);
         $this->db->update('kartu_inventaris_barang', ['is_valid' => 0]);
-        $this->db->insert('kartu_inventaris_barang', ['id_lokasi' => $data['id_lokasi']]);
+        $this->db->insert('kartu_inventaris_barang', [
+            'id_lokasi' => $data['id_lokasi'],
+            'id_staff' => $this->session->userdata('id')
+        ]);
         $this->insertPengesahanBarang($this->db->insert_id(), $data['id_lokasi']);
     }
 

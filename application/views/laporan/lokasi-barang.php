@@ -36,7 +36,8 @@
 							<td style="text-align:center" width="200px">
 								<!-- <a href="<?= site_url('laporan/kelola_barang/' . $lokasi->lokasi_id) ?>" class="btn btn-warning btn-sm">Kelola Kartu Inventaris Barang</a> -->
 								<a href="<?= site_url('laporan/pilih_periode/' . $lokasi->lokasi_id) ?>" class="btn btn-warning btn-sm">Kelola Kartu Inventaris Barang</a>
-								<a href="<?= site_url('laporan/kartuInventarisBarang/' . $lokasi->id_kartu_inventaris_barang) ?>" class="btn btn-info btn-sm">Lihat Kartu</a>
+								<a href="<?= site_url('laporan/KartuInventarisBarang/' . $lokasi->id_kartu_inventaris_barang) ?>" class="btn btn-info btn-sm">Lihat Kartu</a>
+								<a href="<?= site_url('laporan/KategoriKartuInventarisBarang/' . $lokasi->id_kartu_inventaris_barang . '/' . $lokasi->lokasi_id) ?>" class="btn btn-info btn-sm">Lihat KIB</a>
 							</td>
 						</tr>
 					<?php endforeach; ?>

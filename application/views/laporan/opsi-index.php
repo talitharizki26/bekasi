@@ -19,7 +19,10 @@
     $('.pilih-index').on('change', function() {
         const periode = "<?= $periode ?>";
         const index = $(this).val();
-        const id_lokasi = <?= $id_lokasi ?>;
+
+        const id_lokasi = <?= ($id_lokasi) ? $id_lokasi : "NaN" ?>;
+        const id_kategori = <?= ($id_kategori) ? $id_kategori : "NaN" ?>;
+        const id_kartu_inventaris_barang = <?= ($id_kartu_inventaris_barang) ? $id_kartu_inventaris_barang : "NaN" ?>;
         $.ajax({
             url: "<?= base_url('laporan/tabel_barang') ?>",
             type: "post",
@@ -27,6 +30,7 @@
                 'index': index,
                 'periode': periode,
                 'id_lokasi': id_lokasi,
+                'id_kategori': id_kategori,
             },
             success: function(data) {
 
@@ -40,9 +44,25 @@
                 'index': index,
                 'periode': periode,
                 'id_lokasi': id_lokasi,
+                'id_kategori': id_kategori,
             },
             success: function(data) {
                 $('#opsi-barang').html(data);
+            }
+        });
+        $.ajax({
+            url: "<?= base_url('laporan/tabel_kib') ?>",
+            type: "post",
+            data: {
+                'index': index,
+                'periode': periode,
+                'id_lokasi': id_lokasi,
+                'id_kategori': id_kategori,
+                'id_kartu_inventaris_barang': id_kartu_inventaris_barang,
+            },
+            success: function(data) {
+
+                $('.tabel-kib').html(data);
             }
         });
     });

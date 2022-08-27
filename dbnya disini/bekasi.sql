@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2022 at 07:28 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- Generation Time: Aug 27, 2022 at 02:01 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,15 +51,16 @@ INSERT INTO `barang` (`id`, `nama`, `jenis`, `kode`, `kategori_id`, `kondisi`, `
 (1, 'Printer Hp', 'Elektronika', '02.06.02.01.031\n', 2, 'baik', 'Baik Banget', '2022-02-01', 'barang.jpg', 2, 1, 0, NULL),
 (3, 'Tanah', '500 m2', '02.06.02.01.032', 1, '', '', '2022-02-01', 'bukti.jpg', 1, 0, 1, NULL),
 (5, 'Laptop', 'Elektronika', '02.06.02.01.033', 2, 'baik', 'Baik Banget', '2022-03-01', 'barang.jpg', 1, 1, 1, NULL),
-(6, 'pulpen', 'Alat Tulis', '02.06.02.01.034', 2, 'baik', 'Baik Banget', '2022-02-01', 'barang.jpg', 1, 1, 0, NULL),
+(6, 'pulpen', 'Alat Tulis', '02.06.02.01.034', 2, 'baik', 'Baik Banget', '2022-02-01', 'barang.jpg', 1, 1, 1, NULL),
 (7, 'komputer', 'Elektronika', '02.06.02.01.035', 2, 'buruk', 'Komputernya sudah ketinggalan jaman', '2022-02-01', 'barang.jpg', 2, 1, 1, NULL),
 (8, 'Meja Kantor', 'Perabotan', '02.06.02.01.036', 2, 'baik', 'Baik Banget', '2022-02-01', 'barang.jpg', 1, 0, 0, NULL),
-(10, 'Sound System', 'Elektronika', '02.06.02.01.037', 2, 'baik', 'Baik Banget', '2022-02-02', 'barang.jpg', 1, 1, 0, NULL),
+(10, 'Sound System', 'Elektronika', '02.06.02.01.037', 2, 'baik', 'Baik Banget', '2022-02-02', 'barang.jpg', 1, 1, 1, NULL),
 (11, 'Mic', 'Elektronika', '02.06.02.01.038', 2, 'baik', 'Baik Banget', '2022-02-22', 'barang.jpg', 2, 0, 0, NULL),
 (13, 'Lampu Sorot', 'Elektronika', '02.06.02.01.039', 2, 'baik', 'Baik Banget', '2022-02-25', 'barang.jpg', 2, 1, 0, NULL),
-(15, 'Tanah', '100 Hektar', '02.06.02.01.040', 1, 'baik', 'Baik Banget', '2022-04-07', 'barang.jpg', 1, 1, 0, NULL),
+(15, 'Tanah', '100 Hektar', '02.06.02.01.040', 1, 'baik', 'Baik Banget', '2022-04-07', 'barang.jpg', 1, 1, 1, NULL),
 (16, 'Coffe Machine', '', '02.06.02.01.041', 2, 'baik', 'bisa digunakan', '2022-07-10', 'barang.jpg', 1, 1, 1, NULL),
-(17, 'Televisi', '', '02.06.02.01.042', 2, 'baik', 'Bagus', '2022-07-28', 'barang1.jpg', 1, 1, 0, NULL);
+(17, 'Televisi', '', '02.06.02.01.042', 2, 'baik', 'Bagus', '2022-07-28', 'barang1.jpg', 1, 1, 0, NULL),
+(18, 'Gelas', '', '02.06.02.01.043', 2, 'baik', 'oke', '2022-08-30', 'resep-obat.jpg', 2, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -70,29 +71,46 @@ INSERT INTO `barang` (`id`, `nama`, `jenis`, `kode`, `kategori_id`, `kondisi`, `
 CREATE TABLE `kartu_inventaris_barang` (
   `id` int(11) NOT NULL,
   `id_lokasi` int(11) NOT NULL,
+  `id_staff` bigint(20) UNSIGNED DEFAULT NULL,
   `status_pengesahan` int(11) NOT NULL DEFAULT 0,
   `kode_pengesahan` varchar(255) DEFAULT NULL,
   `id_camat` int(11) DEFAULT NULL,
   `is_valid` int(11) NOT NULL DEFAULT 1,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `closed_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `kartu_inventaris_barang`
 --
 
-INSERT INTO `kartu_inventaris_barang` (`id`, `id_lokasi`, `status_pengesahan`, `kode_pengesahan`, `id_camat`, `is_valid`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(10, 1, 0, NULL, NULL, 0, '2022-04-11 01:27:18', '2022-04-11 01:27:18', NULL),
-(11, 1, 0, NULL, NULL, 0, '2022-04-11 01:27:23', '2022-04-11 01:27:23', NULL),
-(12, 2, 0, NULL, NULL, 0, '2022-04-11 01:31:36', '2022-04-11 01:31:36', NULL),
-(13, 2, 0, NULL, NULL, 0, '2022-04-11 01:31:53', '2022-04-11 01:31:53', NULL),
-(14, 1, 1, '648GwNduIEAYKXD', 5, 0, '2022-04-11 01:32:50', '2022-04-10 00:00:00', NULL),
-(15, 1, 0, NULL, NULL, 0, '2022-06-27 01:36:53', '2022-06-27 01:36:53', NULL),
-(16, 1, 0, NULL, NULL, 0, '2022-06-27 02:32:19', '2022-06-27 02:32:19', NULL),
-(17, 2, 1, 'iTLSKJ1VFx2WrhB', 5, 1, '2022-06-27 02:32:28', '2022-07-21 00:00:00', NULL),
-(18, 1, 0, NULL, NULL, 1, '2022-07-27 15:44:16', '2022-07-27 15:44:16', NULL);
+INSERT INTO `kartu_inventaris_barang` (`id`, `id_lokasi`, `id_staff`, `status_pengesahan`, `kode_pengesahan`, `id_camat`, `is_valid`, `created_at`, `updated_at`, `deleted_at`, `closed_at`) VALUES
+(10, 1, 6, 0, NULL, NULL, 0, '2022-04-11 01:27:18', '2022-04-11 01:27:18', NULL, NULL),
+(11, 1, 6, 0, NULL, NULL, 0, '2022-04-11 01:27:23', '2022-04-11 01:27:23', NULL, NULL),
+(12, 2, 6, 0, NULL, NULL, 0, '2022-04-11 01:31:36', '2022-04-11 01:31:36', NULL, NULL),
+(13, 2, 6, 0, NULL, NULL, 0, '2022-04-11 01:31:53', '2022-04-11 01:31:53', NULL, NULL),
+(14, 1, 6, 1, '648GwNduIEAYKXD', 5, 0, '2022-04-11 01:32:50', '2022-04-10 00:00:00', NULL, NULL),
+(15, 1, 6, 0, NULL, NULL, 0, '2022-06-27 01:36:53', '2022-06-27 01:36:53', NULL, NULL),
+(16, 1, 6, 0, NULL, NULL, 0, '2022-06-27 02:32:19', '2022-06-27 02:32:19', NULL, NULL),
+(17, 2, 6, 1, 'iTLSKJ1VFx2WrhB', 5, 0, '2022-06-27 02:32:28', '2022-07-21 00:00:00', NULL, NULL),
+(18, 1, 6, 0, NULL, NULL, 0, '2022-07-27 15:44:16', '2022-07-27 15:44:16', NULL, NULL),
+(19, 2, 6, 0, NULL, NULL, 0, '2022-08-26 17:39:42', '2022-08-26 17:39:42', NULL, NULL),
+(20, 1, 6, 1, 'kgeSMTSRrS2r6Rf', 5, 0, '2022-08-26 19:08:44', '2022-08-26 00:00:00', NULL, NULL),
+(21, 2, 6, 1, 'cwSx3cMcgSPA6QV', 5, 0, '2022-08-26 19:27:45', '2022-08-26 00:00:00', NULL, '2022-08-26 08:16:41'),
+(22, 2, 6, 1, 'UgM38MIXOOYgpPt', 5, 0, '2022-08-26 20:21:07', '2022-08-26 00:00:00', NULL, NULL),
+(23, 2, 6, 0, NULL, NULL, 0, '2022-08-26 20:28:22', '2022-08-26 20:28:22', NULL, NULL),
+(24, 2, 6, 0, NULL, NULL, 0, '2022-08-26 20:45:19', '2022-08-26 20:45:19', NULL, NULL),
+(25, 2, 6, 0, NULL, NULL, 0, '2022-08-26 20:51:45', '2022-08-26 20:51:45', NULL, NULL),
+(26, 2, 6, 0, NULL, NULL, 0, '2022-08-26 20:52:10', '2022-08-26 20:52:10', NULL, NULL),
+(27, 2, 6, 1, '79BGm8btwLAzhNc', 5, 0, '2022-08-26 20:52:28', '2022-08-26 00:00:00', NULL, NULL),
+(28, 1, 6, 0, NULL, NULL, 0, '2022-08-26 21:26:13', '2022-08-26 21:26:13', NULL, NULL),
+(29, 2, 6, 0, NULL, NULL, 0, '2022-08-26 22:18:02', '2022-08-26 22:18:02', NULL, NULL),
+(30, 2, 6, 0, NULL, NULL, 0, '2022-08-26 22:18:22', '2022-08-26 22:18:22', NULL, NULL),
+(31, 2, 6, 0, NULL, NULL, 0, '2022-08-26 22:31:37', '2022-08-26 22:31:37', NULL, NULL),
+(32, 2, 6, 1, 'iLwCpVaYqlXwYqC', 5, 1, '2022-08-26 22:31:39', '2022-08-26 00:00:00', NULL, NULL),
+(33, 1, 6, 0, NULL, NULL, 1, '2022-08-27 02:09:48', '2022-08-27 02:09:48', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -109,15 +127,16 @@ CREATE TABLE `kartu_inventaris_ruangan` (
   `is_valid` int(11) NOT NULL DEFAULT 1,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `closed_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `kartu_inventaris_ruangan`
 --
 
-INSERT INTO `kartu_inventaris_ruangan` (`id`, `id_lokasi`, `status_pengesahan`, `kode_pengesahan`, `id_camat`, `is_valid`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 'X8WK1YjYVmcIojo', 5, 1, '2022-02-05 00:43:08', '2022-02-05 00:00:00', NULL);
+INSERT INTO `kartu_inventaris_ruangan` (`id`, `id_lokasi`, `status_pengesahan`, `kode_pengesahan`, `id_camat`, `is_valid`, `created_at`, `updated_at`, `deleted_at`, `closed_at`) VALUES
+(1, 1, 1, 'X8WK1YjYVmcIojo', 5, 1, '2022-02-05 00:43:08', '2022-02-05 00:00:00', NULL, '2022-08-26 08:10:23');
 
 -- --------------------------------------------------------
 
@@ -144,7 +163,7 @@ INSERT INTO `kategori` (`id`, `nama`, `kib`, `deleted_at`) VALUES
 (5, 'Aset Tetap Lainnya', 'E', NULL),
 (6, 'Konstruksi Dalam Pengerjaan', 'F', NULL),
 (7, 'Aset Lainnya', 'G', NULL),
-(8, 'Berkas', '', NULL);
+(8, 'Berkas', 'H', NULL);
 
 -- --------------------------------------------------------
 
@@ -232,7 +251,36 @@ INSERT INTO `pengesahan_barang` (`id`, `id_kartu_inventaris_barang`, `id_barang`
 (57, 16, 16, '2022-06-27 02:32:19', NULL),
 (58, 17, 7, '2022-06-27 02:32:28', NULL),
 (59, 18, 5, '2022-07-27 15:44:16', NULL),
-(60, 18, 16, '2022-07-27 15:44:16', NULL);
+(60, 18, 16, '2022-07-27 15:44:16', NULL),
+(61, 10, 5, '2022-08-26 19:08:44', NULL),
+(62, 10, 10, '2022-08-26 19:08:44', NULL),
+(63, 10, 16, '2022-08-26 19:08:44', NULL),
+(64, 11, 7, '2022-08-26 19:27:45', NULL),
+(65, 22, 7, '2022-08-26 20:21:07', NULL),
+(66, 18, 7, '2022-08-26 20:28:22', NULL),
+(67, 18, 18, '2022-08-26 20:28:22', NULL),
+(68, 13, 7, '2022-08-26 20:45:19', NULL),
+(69, 13, 13, '2022-08-26 20:45:19', NULL),
+(70, 13, 18, '2022-08-26 20:45:19', NULL),
+(71, 7, 13, '2022-08-26 20:51:45', NULL),
+(72, 7, 18, '2022-08-26 20:51:45', NULL),
+(73, 13, 18, '2022-08-26 20:52:10', NULL),
+(74, 11, 18, '2022-08-26 20:52:28', NULL),
+(75, 15, 5, '2022-08-26 21:26:13', NULL),
+(76, 15, 10, '2022-08-26 21:26:13', NULL),
+(77, 15, 15, '2022-08-26 21:26:13', NULL),
+(78, 15, 16, '2022-08-26 21:26:13', NULL),
+(79, 11, 18, '2022-08-26 22:18:02', NULL),
+(80, 7, 7, '2022-08-26 22:18:22', NULL),
+(81, 7, 18, '2022-08-26 22:18:22', NULL),
+(82, 11, 7, '2022-08-26 22:31:37', NULL),
+(83, 11, 18, '2022-08-26 22:31:37', NULL),
+(84, 18, 7, '2022-08-26 22:31:39', NULL),
+(85, 6, 5, '2022-08-27 02:09:48', NULL),
+(86, 6, 6, '2022-08-27 02:09:48', NULL),
+(87, 6, 10, '2022-08-27 02:09:49', NULL),
+(88, 6, 15, '2022-08-27 02:09:49', NULL),
+(89, 6, 16, '2022-08-27 02:09:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -353,7 +401,7 @@ INSERT INTO `user` (`id`, `username`, `password`, `nama_operator`, `nomor_anggot
 (2, 'dediajalah', '$2y$10$NJtABZXhhXQrJJYJ31cjSejm8z5a3HUd.ZqeFbHCBHIwiTfYFiSca', 'dedi', '002', 'admin', NULL, NULL),
 (3, 'bedul', '$2y$10$NJtABZXhhXQrJJYJ31cjSejm8z5a3HUd.ZqeFbHCBHIwiTfYFiSca', 'Bedul', '003', 'petugas', 1, NULL),
 (4, 'kusno', '$2y$10$NJtABZXhhXQrJJYJ31cjSejm8z5a3HUd.ZqeFbHCBHIwiTfYFiSca', 'kusno', '004', 'petugas', 1, NULL),
-(5, 'andini', '$2y$10$0lIw67UmrY5B5vgKrzxfU.R82z.wmaTKdwKaPq6Qg5cyl67ua4MPy', 'Andini Septia', '005', 'kecamatan', 1, NULL),
+(5, 'natdev', '$2y$10$0lIw67UmrY5B5vgKrzxfU.R82z.wmaTKdwKaPq6Qg5cyl67ua4MPy', 'Natalia Devi', '005', 'kecamatan', 1, NULL),
 (6, 'sentaurus', '$2y$10$0lIw67UmrY5B5vgKrzxfU.R82z.wmaTKdwKaPq6Qg5cyl67ua4MPy', 'Senta Ruslamon', '006', 'pengelola', 1, NULL),
 (7, 'sem', '$2y$10$0lIw67UmrY5B5vgKrzxfU.R82z.wmaTKdwKaPq6Qg5cyl67ua4MPy', 'Solihin Emda', '007', 'kelurahan', 1, NULL),
 (8, 'darwin', '$2y$10$0lIw67UmrY5B5vgKrzxfU.R82z.wmaTKdwKaPq6Qg5cyl67ua4MPy', 'Darwin', '008', 'kecamatan', 2, NULL);
@@ -444,13 +492,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `kartu_inventaris_barang`
 --
 ALTER TABLE `kartu_inventaris_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `kartu_inventaris_ruangan`
@@ -480,7 +528,7 @@ ALTER TABLE `lokasi`
 -- AUTO_INCREMENT for table `pengesahan_barang`
 --
 ALTER TABLE `pengesahan_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `pengesahan_ruangan`

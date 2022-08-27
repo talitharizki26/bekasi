@@ -169,6 +169,107 @@ class MBarang extends CI_Model
             'is_inventaris' => 1,
         ])->result();
     }
+    function get_kib($id_lokasi, $id_kategori = null, $periode = null, $index = null)
+    {
+        $tahun = date('Y');
+
+        if ($periode == null || $periode == "semua") {
+            $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, '' AS periode, '' AS indeks");
+        } elseif ($periode == "triwulan") {
+            switch ($index) {
+                case '1':
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks");
+                    break;
+                case '2':
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks");
+                    break;
+                case '3':
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks");
+                    break;
+                case '4':
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks");
+                    break;
+                default:
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, IF(MONTH(barang.tanggal_pengadaan)<=3, 1, IF(MONTH(barang.tanggal_pengadaan)<=6, 2, IF(MONTH(barang.tanggal_pengadaan)<=9, 3, 4))) AS indeks");
+                    break;
+            }
+        } elseif ($periode == "semester") {
+            switch ($index) {
+                case '1':
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Semester' AS periode, '$index' AS indeks");
+                    break;
+                case '2':
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Semester' AS periode, '$index' AS indeks");
+                    break;
+                default:
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Semester' AS periode, IF(MONTH(barang.tanggal_pengadaan)<=6,1,2) AS indeks");
+                    break;
+            }
+        } elseif ($periode == "tahunan") {
+            if ($index && $index != "NaN") {
+                $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Tahun' AS periode, '$index' AS indeks");
+            } else {
+                $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Tahun' AS periode, YEAR(barang.tanggal_pengadaan) AS indeks");
+            }
+        }
+        $this->db->distinct();
+        // $this->db->join('kartu_inventaris_barang', 'pengesahan_barang.id_kartu_inventaris_barang = kartu_inventaris_barang.id');
+
+        $this->db->join('barang', 'kategori.id = barang.kategori_id');
+        $this->db->join('lokasi', 'lokasi.id = barang.id_lokasi');
+        $this->db->join('kecamatan', 'kecamatan.id = lokasi.id_kecamatan');
+        $this->db->join('pengesahan_barang', 'pengesahan_barang.id_barang = barang.id');
+        $this->db->join('kartu_inventaris_barang', 'pengesahan_barang.id_kartu_inventaris_barang = kartu_inventaris_barang.id');
+
+        if ($id_kategori) {
+            $this->db->where('kategori_id', $id_kategori);
+        }
+        switch ($periode) {
+            case 'triwulan':
+                switch ($index) {
+                    case 1:
+                        $this->db->where('MONTH(tanggal_pengadaan) >=', 1);
+                        $this->db->where('MONTH(tanggal_pengadaan) <=', 3);
+                        break;
+                    case 2:
+                        $this->db->where('MONTH(tanggal_pengadaan) >=', 4);
+                        $this->db->where('MONTH(tanggal_pengadaan) <=', 6);
+                        break;
+                    case 3:
+                        $this->db->where('MONTH(tanggal_pengadaan) >=', 7);
+                        $this->db->where('MONTH(tanggal_pengadaan) <=', 9);
+                        break;
+                    case 4:
+                        $this->db->where('MONTH(tanggal_pengadaan) >=', 10);
+                        $this->db->where('MONTH(tanggal_pengadaan) <=', 12);
+                        break;
+                }
+                break;
+            case 'semester':
+                switch ($index) {
+                    case 1:
+                        $this->db->where('MONTH(tanggal_pengadaan) >=', 1);
+                        $this->db->where('MONTH(tanggal_pengadaan) <=', 6);
+                        break;
+                    case 2:
+                        $this->db->where('MONTH(tanggal_pengadaan) >=', 7);
+                        $this->db->where('MONTH(tanggal_pengadaan) <=', 12);
+                        break;
+                }
+                break;
+            case 'tahunan':
+                if ($index && $index != "NaN") {
+                    $tahun = $index;
+                    $this->db->where('YEAR(tanggal_pengadaan)', $tahun);
+                }
+                break;
+        }
+        $this->db->order_by('kategori.kib');
+        return $this->db->get_where("kategori", [
+            'barang.id_lokasi' => $id_lokasi,
+            'is_inventaris' => 1,
+        ])->result();
+    }
 
     function get_non_inventaris_barang($id_lokasi, $id_kategori = null, $periode = null, $index = null)
     {

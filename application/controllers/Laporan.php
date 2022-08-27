@@ -104,11 +104,22 @@ class Laporan extends CI_Controller
     {
         $periode = $this->input->post("periode");
         $id_lokasi = $this->input->post("id_lokasi");
-        $id_kategori = null;
+        if ($this->input->post("id_kategori")) {
+            $id_kategori = $this->input->post("id_kategori");
+        } else {
+            $id_kategori = null;
+        }
+        if ($this->input->post("id_kartu_inventaris_barang")) {
+            $id_kartu_inventaris_barang = $this->input->post("id_kartu_inventaris_barang");
+        } else {
+            $id_kartu_inventaris_barang = null;
+        }
+
         $this->load->view('laporan/opsi-index', [
             'periode' => $periode,
             'id_lokasi' => $id_lokasi,
             'id_kategori' => $id_kategori,
+            'id_kartu_inventaris_barang' => $id_kartu_inventaris_barang,
             'data_tahun' => $this->MBarang->get_data_tahun($id_lokasi, $id_kategori),
         ]);
     }
@@ -117,7 +128,11 @@ class Laporan extends CI_Controller
         $periode = $this->input->post("periode");
         $index = $this->input->post("index");
         $id_lokasi = $this->input->post("id_lokasi");
-        $id_kategori = null;
+        if ($this->input->post("id_kategori")) {
+            $id_kategori = $this->input->post("id_kategori");
+        } else {
+            $id_kategori = null;
+        }
         $this->load->view('laporan/opsi-barang', [
             'periode' => $periode,
             'lokasi' =>  $this->MBarang->get_barang_by_lokasi($id_lokasi),
@@ -132,7 +147,11 @@ class Laporan extends CI_Controller
         $periode = $this->input->post("periode");
         $index = $this->input->post("index");
         $id_lokasi = $this->input->post("id_lokasi");
-        $id_kategori = null;
+        if ($this->input->post("id_kategori")) {
+            $id_kategori = $this->input->post("id_kategori");
+        } else {
+            $id_kategori = null;
+        }
         $this->load->view('laporan/tabel-barang', [
             'periode' => $periode,
             'index' => $index,
@@ -220,10 +239,20 @@ class Laporan extends CI_Controller
     public function kartuInventarisBarang($id_kartu_inventaris_barang = null, $id_kategori = null)
     {
         $inventaris = $this->db->get_where('kartu_inventaris_barang', ['id' => $id_kartu_inventaris_barang])->row();
+        if ($this->input->get('periode')) {
+            $periode = $this->input->get('periode');
+        } else {
+            $periode = null;
+        }
+        if ($this->input->get('index')) {
+            $index = $this->input->get('index');
+        } else {
+            $index = null;
+        }
         $this->load->view('template', [
             'page' => 'laporan/kartu-inventaris-barang',
             'lokasi' =>  $this->MBarang->get_kartu_inventaris_barang($id_kartu_inventaris_barang),
-            'data_barang' => $this->MBarang->get_inventaris_barang($inventaris->id_lokasi, $id_kategori),
+            'data_barang' => $this->MBarang->get_inventaris_barang($inventaris->id_lokasi, $id_kategori, $periode, $index),
         ]);
     }
 
@@ -275,5 +304,72 @@ class Laporan extends CI_Controller
             'closed_at' => date("Y-m-d H:i:s")
         ]);
         redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    public function kategoriKartuInventarisBarang($id_kartu_inventaris_barang = null, $id_lokasi = null, $id_kategori = null)
+    {
+        if (!empty($this->input->get('periode'))) {
+            $periode = $this->input->get('periode');
+        } else {
+            $periode = "semua";
+        }
+        if (!empty($this->input->get('index'))) {
+            $index = $this->input->get('index');
+        } else {
+            $index = null;
+        }
+        if ($this->input->get('id_lokasi')) {
+            $id_lokasi = $this->input->get('id_lokasi');
+        }
+        if ($this->input->get('id_kategori')) {
+            $id_kategori = $this->input->get('id_kategori');
+        }
+        $this->load->view('template', [
+            'page' => 'laporan/kategori-kib',
+            'periode' => $periode,
+            'id_kartu_inventaris_barang' => $id_kartu_inventaris_barang,
+            'id_lokasi' => $id_lokasi,
+            'id_kategori' => $id_kategori,
+            'index' => $index,
+            'data_kategori' => $this->db->get('kategori')->result(),
+            'data_inventaris' => $this->MBarang->get_kib($id_lokasi, $id_kategori, $periode, $index),
+        ]);
+    }
+    public function tabel_kib()
+    {
+        if (!empty($this->input->post('periode')) && $this->input->post('periode') != "NaN") {
+            $periode = $this->input->post('periode');
+        } else {
+            $periode = "semua";
+        }
+        if (!empty($this->input->post('index')) && $this->input->post('index') != "NaN") {
+            $index = $this->input->post('index');
+        } else {
+            $index = null;
+        }
+        if (!empty($this->input->post('id_lokasi')) && $this->input->post('id_lokasi') != "NaN") {
+            $id_lokasi = $this->input->post('id_lokasi');
+        } else {
+            $id_lokasi = null;
+        }
+        if (!empty($this->input->post('id_kategori')) && $this->input->post('id_kategori') != "NaN") {
+            $id_kategori = $this->input->post('id_kategori');
+        } else {
+            $id_kategori = null;
+        }
+        if (!empty($this->input->post('id_kartu_inventaris_barang')) && $this->input->post('id_kartu_inventaris_barang') != "NaN") {
+            $id_kartu_inventaris_barang = $this->input->post('id_kartu_inventaris_barang');
+        } else {
+            $id_kartu_inventaris_barang = null;
+        }
+        $this->load->view('laporan/tabel-kib', [
+            'periode' => $periode,
+            'id_lokasi' => $id_lokasi,
+            'id_kategori' => $id_kategori,
+            'id_kartu_inventaris_barang' => $id_kartu_inventaris_barang,
+            'index' => $index,
+            'data_kategori' => $this->db->get('kategori')->result(),
+            'data_inventaris' => $this->MBarang->get_kib($id_lokasi, $id_kategori, $periode, $index),
+        ]);
     }
 }

@@ -38,14 +38,14 @@
 				<div class="alert alert-success mt-3" role="alert" style="margin-top: 10px" id="hilang1">
 					Status Pengesahan : Sudah disahkan
 				</div>
-				<a href="#" onclick="printKartu()" class="btn btn-primary" id="hilang2"> <i class="fa fa-print"></i> Print </a>
+				<a href="#" onclick="printKartu()" class="btn btn-primary hilang" id="hilang2"> <i class="fa fa-print"></i> Print </a>
 			<?php else : ?>
 				<div class="alert alert-danger mt-3" role="alert" style="margin-top: 10px" id="hilang1">
 					Status Pengesahan : Belum disahkan
 				</div>
 			<?php endif ?>
 
-			<table id="example1" class="table table-bordered" style="margin-bottom: 10px">
+			<table id="" class="table table-bordered tabel" style="margin-bottom: 10px">
 				<thead>
 					<tr>
 						<th>No</th>
@@ -136,12 +136,14 @@
 	</div>
 </section>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-	function printKartu() {
-		var x = document.getElementById("hilang1");
-		var y = document.getElementById("hilang2");
-		x.style.display = "none";
-		y.style.display = "none";
+	function printKartu() {}
+
+	$('.hilang').on('click', function() {
+		$("#hilang1").hide();
+		$("#hilang2").hide();
+		$(".tabel").attr('id', '');
 		window.print();
-	}
+	})
 </script>

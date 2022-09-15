@@ -227,6 +227,11 @@
                             </a>
                         </li>
                         <li>
+                            <a href="<?php echo base_url('lokasi'); ?>">
+                                <i class="fa fa-credit-card"></i> <span>Data Lokasi</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="<?php echo base_url('laporan/barang'); ?>">
                                 <i class="fa fa-credit-card"></i> <span>Kartu Inventaris Barang</span>
                             </a>

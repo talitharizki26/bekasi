@@ -26,9 +26,17 @@
 						<div class="col-md-3">Alamat</div>
 						<div class="col-md-1"> : </div>
 						<div class="col-md-8"><?= $lokasi->alamat ?></div>
-						<div class="col-md-3">Kecamtan</div>
+						<div class="col-md-3">Kecamatan</div>
 						<div class="col-md-1"> : </div>
 						<div class="col-md-8"><?= $lokasi->nama_kecamatan ?></div>
+						<div class="col-md-3">Tanggal</div>
+						<div class="col-md-1"> : </div>
+						<div class="col-md-8"><?= cari_tanggal($lokasi->created_at) ?></div>
+						<?php if ($this->input->get('periode')) : ?>
+							<div class="col-md-3">Periode</div>
+							<div class="col-md-1"> : </div>
+							<div class="col-md-8"><?= $this->input->get('periode') . " " . $this->input->get('index') ?></div>
+						<?php endif; ?>
 					</div>
 				</div>
 				<div class="col-lg-6">

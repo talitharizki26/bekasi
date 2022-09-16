@@ -174,42 +174,42 @@ class MBarang extends CI_Model
         $tahun = date('Y');
 
         if ($periode == null || $periode == "semua") {
-            $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, '' AS periode, '' AS indeks");
+            $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, '' AS periode, '' AS indeks, kartu_inventaris_barang.kode_pengesahan, kartu_inventaris_barang.status_pengesahan");
         } elseif ($periode == "triwulan") {
             switch ($index) {
                 case '1':
-                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks");
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks, kartu_inventaris_barang.kode_pengesahan, kartu_inventaris_barang.status_pengesahan");
                     break;
                 case '2':
-                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks");
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks, kartu_inventaris_barang.kode_pengesahan, kartu_inventaris_barang.status_pengesahan");
                     break;
                 case '3':
-                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks");
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks, kartu_inventaris_barang.kode_pengesahan, kartu_inventaris_barang.status_pengesahan");
                     break;
                 case '4':
-                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks");
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, '$index' AS indeks, kartu_inventaris_barang.kode_pengesahan, kartu_inventaris_barang.status_pengesahan");
                     break;
                 default:
-                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, IF(MONTH(barang.tanggal_pengadaan)<=3, 1, IF(MONTH(barang.tanggal_pengadaan)<=6, 2, IF(MONTH(barang.tanggal_pengadaan)<=9, 3, 4))) AS indeks");
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Triwulan' AS periode, IF(MONTH(barang.tanggal_pengadaan)<=3, 1, IF(MONTH(barang.tanggal_pengadaan)<=6, 2, IF(MONTH(barang.tanggal_pengadaan)<=9, 3, 4))) AS indeks, kartu_inventaris_barang.kode_pengesahan, kartu_inventaris_barang.status_pengesahan");
                     break;
             }
         } elseif ($periode == "semester") {
             switch ($index) {
                 case '1':
-                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Semester' AS periode, '$index' AS indeks");
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Semester' AS periode, '$index' AS indeks, kartu_inventaris_barang.kode_pengesahan, kartu_inventaris_barang.status_pengesahan");
                     break;
                 case '2':
-                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Semester' AS periode, '$index' AS indeks");
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Semester' AS periode, '$index' AS indeks, kartu_inventaris_barang.kode_pengesahan, kartu_inventaris_barang.status_pengesahan");
                     break;
                 default:
-                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Semester' AS periode, IF(MONTH(barang.tanggal_pengadaan)<=6,1,2) AS indeks");
+                    $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Semester' AS periode, IF(MONTH(barang.tanggal_pengadaan)<=6,1,2) AS indeks, kartu_inventaris_barang.kode_pengesahan, kartu_inventaris_barang.status_pengesahan");
                     break;
             }
         } elseif ($periode == "tahunan") {
             if ($index && $index != "NaN") {
-                $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Tahun' AS periode, '$index' AS indeks");
+                $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Tahun' AS periode, '$index' AS indeks, kartu_inventaris_barang.kode_pengesahan, kartu_inventaris_barang.status_pengesahan");
             } else {
-                $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Tahun' AS periode, YEAR(barang.tanggal_pengadaan) AS indeks");
+                $this->db->select("kategori.id AS id_kategori, kategori.kib AS kib, YEAR(barang.tanggal_pengadaan) AS tahun, 'Tahun' AS periode, YEAR(barang.tanggal_pengadaan) AS indeks, kartu_inventaris_barang.kode_pengesahan, kartu_inventaris_barang.status_pengesahan");
             }
         }
         $this->db->distinct();

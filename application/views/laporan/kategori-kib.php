@@ -77,7 +77,7 @@
                                 <th>No</th>
                                 <th>Nama Laporan</th>
                                 <th>Tahun</th>
-                                <!-- <th>Status</th> -->
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -89,8 +89,8 @@
                                     <td><?= $no++; ?></td>
                                     <td>KIB <?= $barang->kib . ' ' . $barang->periode . ' ' . $barang->indeks; ?></td>
                                     <td><?= $barang->tahun ?></td>
-                                    <!-- <td><?= ($barang->kode_pengesahan) ? "Telah disahkan" : "Belum disahkan" ?></td> -->
-                                    <td><a href="<?= base_url("laporan/KartuInventarisBarang/$id_kartu_inventaris_barang/$barang->id_kategori?periode=$periode&index=$index") ?>" class="btn btn-info">Lihat</a></td>
+                                    <td><?= ($kode_pengesahan) ? "Telah disahkan" : "Belum disahkan" ?></td>
+                                    <td><a href="<?= base_url("laporan/KartuInventarisBarang/$id_kartu_inventaris_barang/$barang->id_kategori?periode=$barang->periode&index=$barang->indeks") ?>" class="btn btn-info">Lihat</a></td>
                                 </tr>
 
                             <?php endforeach; ?>
@@ -106,7 +106,7 @@
                                     <th>No</th>
                                     <th>Nama Laporan</th>
                                     <th>Tahun</th>
-                                    <!-- <th>Status</th> -->
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -119,8 +119,8 @@
                                             <td><?= $no++; ?></td>
                                             <td>KIB <?= $barang->kib . ' ' . $barang->periode . ' ' . $barang->indeks; ?></td>
                                             <td><?= $barang->tahun ?></td>
-                                            <!-- <td><?= ($barang->kode_pengesahan) ? "Telah disahkan" : "Belum disahkan" ?></td> -->
-                                            <td><a href="<?= base_url("laporan/KartuInventarisBarang/$id_kartu_inventaris_barang/$barang->id_kategori?periode=$periode&index=$index") ?>" class="btn btn-info">Lihat</a></td>
+                                            <td><?= ($kode_pengesahan) ? "Telah disahkan" : "Belum disahkan" ?></td>
+                                            <td><a href="<?= base_url("laporan/KartuInventarisBarang/$id_kartu_inventaris_barang/$barang->id_kategori?periode=$barang->periode&index=$barang->indeks") ?>" class="btn btn-info">Lihat</a></td>
                                         </tr>
                                     <?php endif; ?>
                                 <?php endforeach; ?>

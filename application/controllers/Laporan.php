@@ -324,10 +324,12 @@ class Laporan extends CI_Controller
         if ($this->input->get('id_kategori')) {
             $id_kategori = $this->input->get('id_kategori');
         }
+        $kode_pengesahan = $this->db->get_where('kartu_inventaris_barang', ['id' => $id_kartu_inventaris_barang])->row()->kode_pengesahan;
         $this->load->view('template', [
             'page' => 'laporan/kategori-kib',
             'periode' => $periode,
             'id_kartu_inventaris_barang' => $id_kartu_inventaris_barang,
+            'kode_pengesahan' => $kode_pengesahan,
             'id_lokasi' => $id_lokasi,
             'id_kategori' => $id_kategori,
             'index' => $index,

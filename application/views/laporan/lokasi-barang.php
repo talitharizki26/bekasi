@@ -20,19 +20,27 @@
 						<th>Nama Lokasi</th>
 						<th>Alamat</th>
 						<th>Tanggal dibuat</th>
+						<th>Status</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php $no = 1;
 					foreach ($data_lokasi as $lokasi) : ?>
-						<tr>
+						<?php if ($lokasi->kode_pengesahan) {
+							$warna = "bg-success";
+						} else {
+							$warna = "bg-danger";
+						}
+						?>
+						<tr class="<?= $warna ?>">
 							<td width="80px"><?php echo $no++ ?></td>
 							<td><?php echo $lokasi->id_kartu_inventaris_barang ?></td>
 							<td><?php echo $lokasi->id_lokasi ?></td>
 							<td><?php echo $lokasi->nama_lokasi ?></td>
 							<td><?php echo $lokasi->alamat ?></td>
 							<td><?php echo cari_tanggal($lokasi->created_at) ?></td>
+							<td><?= ($lokasi->kode_pengesahan) ? "Telah disahkan" : "Belum disahkan" ?></td>
 							<td style="text-align:center" width="200px">
 								<!-- <a href="<?= site_url('laporan/kelola_barang/' . $lokasi->lokasi_id) ?>" class="btn btn-warning btn-sm">Kelola Kartu Inventaris Barang</a> -->
 								<a href="<?= site_url('laporan/pilih_periode/' . $lokasi->lokasi_id) ?>" class="btn btn-warning btn-sm">Kelola Kartu Inventaris Barang</a>
